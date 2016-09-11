@@ -68,7 +68,7 @@ const run = async () => {
         created_at: (new Date()).toISOString(),
         updated_at: (new Date()).toISOString(),
         content: pdescription,
-        lead: p.lead
+        lead: p.lead.substr(0, 140)
       }
     });
 
@@ -133,7 +133,7 @@ const run = async () => {
         pk: episodeIndex,
         fields: {
           title: title,
-          lead: lead,
+          lead: lead.substr(0, 140),
           show: showIndex,
           created_at: date,
           updated_at: date,
