@@ -59,7 +59,7 @@ class Post(models.Model):
     title = models.CharField(max_length=64)
     slug = models.CharField(max_length=64, unique=True, editable=False)
     image = models.ImageField(upload_to='uploads/images')
-    lead = models.CharField(max_length=140)
+    lead = models.CharField(max_length=300)
     content = models.TextField()
     deleted = models.BooleanField(default=False)
 
