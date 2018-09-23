@@ -45,12 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'data_models',
     'graphene_django',
-    'django_summernote',
     'colorfield',
     'sorl.thumbnail',
     'sorl_cropping',
     'raven.contrib.django.raven_compat',
     'solo',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -131,12 +132,91 @@ STATIC_ROOT = config("REVOLT_STATIC_ROOT", default=os.path.join(BASE_DIR, 'stati
 MEDIA_URL = '/media/'
 MEDIA_ROOT = config("REVOLT_MEDIA_ROOT", default=os.path.join(BASE_DIR, 'mediafiles'))
 
-SUMMERNOTE_CONFIG = {
-    'toolbar': [['style', ['bold', 'italic', 'underline', 'clear']], ['list', ['ul', 'ol']],
-                ['media', ['link', 'picture',
-                           'videoAttributes']], ['tools', ['redo', 'undo', 'fullscreen']]],
-    'js': ('/static/summernote-video-attributes.js', ),
-    'css': ('/static/summernote-video-attributes.css', )
+CKEDITOR_UPLOAD_PATH = 'ckeditor'
+CKEDITOR_IMAGE_BACKEND = 'pillow'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar_Article': [
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'FontSize', 'Source', '-', 'ShowBlocks', 'Maximize'],
+            },
+            '/',
+            {
+                'name': 'justify',
+                'items': ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            },
+            {
+                'name':
+                'basicstyles',
+                'items': [
+                    'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript',
+                    'Blockquote', '-', 'RemoveFormat'
+                ],
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor'],
+            },
+            {
+                'name': 'clipboard',
+                'items': ['Cut', 'Copy', 'SelectAll', '-', 'Undo', 'Redo'],
+            },
+            '/',
+            {
+                'name': 'paragraph',
+                'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink', 'Anchor']
+            },
+            {
+                'name':
+                'insert',
+                'items':
+                ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe', 'Youtube']
+            },
+        ],
+        'toolbar':
+        'Article',
+        'height':
+        800,
+        'width':
+        1000,
+        'forcePasteAsPlainText':
+        True,
+        'font_names':
+        'Arial/Arial, Helvetica, sans-serif',
+        'font_defaultLabel':
+        'Arial',
+        'youtube_responsive':
+        True,
+        'youtube_disabled_fields': [
+            'txtWidth',
+            'txtHeight',
+            'txtEmbed',
+        ],
+        'tabSpaces':
+        4,
+        'contentsCss':
+        '/static/ckeditor/editor.css',
+        'extraPlugins':
+        ','.join([
+            # your extra plugins here
+            'uploadimage',
+            'autolink',
+            'image2',
+            'youtube',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
+    }
 }
 
 THUMBNAIL_ENGINE = 'sorl_cropping.engine.CropEngine'

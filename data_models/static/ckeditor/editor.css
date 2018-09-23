@@ -1,0 +1,41 @@
+/**
+ * This file is used for styling the contents of the CKEditor. The file is used both in 
+ * the backend (for styling while editing) and frontend (to display content correctly).
+ *
+ * The contents of the file MUST be identical to `editor.css` used in various components
+ * in the frontend repo.
+*/
+
+a {
+    background: transparent !important;
+    color: black;
+    text-decoration-color: #ECB61C;
+}
+
+img {
+    height: auto;
+    width: 100%;
+}
+
+
+/**
+ * START: Old classes used by the old Summernote editor. Must be included to ensure
+ * backwards compatibility of articles.
+*/
+
+:global(.embed-responsive-16by9) {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 */
+}
+  
+:global(.embed-responsive-16by9 > iframe) {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/**
+ * END: Old classes used by the old Summernote editor. Must be included to ensure
+ * backwards compatibility of articles.
+*/

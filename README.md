@@ -59,7 +59,7 @@ We use `pytest`, `isort` and `flake8`  to test and lint the project.
 Run the commands before commiting:
 ```bash
 flake8 api_graphql app data_models
-yapf -pdr api_graphql app data_models -e '**/migrations' -e '**/snapshots'
+yapf -pir api_graphql app data_models -e '**/migrations' -e '**/snapshots'
 isort -rc api_graphql app data_models
 pytest
 

@@ -7,6 +7,6 @@ from graphene_django.views import GraphQLView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^graphql', GraphQLView.as_view(graphiql=True)),
-    url(r'^summernote/', include('django_summernote.urls')),
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
