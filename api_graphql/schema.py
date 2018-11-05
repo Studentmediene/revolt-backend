@@ -220,11 +220,13 @@ class Query(graphene.ObjectType):
 
     post = graphene.Field(PostType, id=graphene.Int(), slug=graphene.String())
 
-    all_posts = graphene.List(PostType)
+    all_posts = graphene.List(PostType, offset=graphene.Int(), count=graphene.Int())
 
+    # DEPRECATED
     paginated_posts = graphene.Field(
         PostPaginatedType, page=graphene.Int(), page_size=graphene.Int())
 
+    # DEPRECATED
     front_page_posts = graphene.List(PostType)
 
     user = graphene.Field(UserType, id=graphene.Int())
@@ -271,26 +273,34 @@ class Query(graphene.ObjectType):
 
     @staticmethod
     def resolve_post(root, info, id=None, slug=None):
+        post = Post.objects \
+            .filter(publish_at__lte=timezone.now()) \
+            .filter(ready_to_be_published=True)
         if id:
-            return Post.objects.get(pk=id)
-        return Post.objects.get(slug=slug)
+            return post.get(pk=id)
+        else:
+            return post.get(slug=slug)
 
     @staticmethod
-    def resolve_all_posts(root, info):
-        return Post.objects.order_by('-created_at')
+    def resolve_all_posts(root, info, offset=0, count=None):
+        posts = Post.objects \
+            .order_by('-publish_at') \
+            .filter(publish_at__lte=timezone.now()) \
+            .filter(ready_to_be_published=True)
+        if count:
+            return posts[offset:offset + count]
+        else:
+            return posts[offset:]
 
+    # DEPRECATED
     @staticmethod
     def resolve_front_page_posts(root, info):
-        return Post.objects.order_by('-created_at')[:30]
+        return Post.objects \
+            .order_by('-publish_at') \
+            .filter(publish_at__lte=timezone.now()) \
+            .filter(ready_to_be_published=True)[:30]
 
-    @staticmethod
-    def resolve_all_users(root, info):
-        return User.objects.all()
-
-    @staticmethod
-    def resolve_user(root, info, id):
-        return User.objects.get(pk=id)
-
+    # DEPRECATED
     @staticmethod
     def resolve_paginated_posts(self, info, page, page_size=10):
         qs = Post.objects \
@@ -298,6 +308,14 @@ class Query(graphene.ObjectType):
             .filter(publish_at__lte=timezone.now()) \
             .filter(ready_to_be_published=True)
         return get_paginator(qs, page_size, page, PostPaginatedType)
+
+    @staticmethod
+    def resolve_user(root, info, id):
+        return User.objects.get(pk=id)
+
+    @staticmethod
+    def resolve_all_users(root, info):
+        return User.objects.all()
 
 
 schema = graphene.Schema(query=Query)
