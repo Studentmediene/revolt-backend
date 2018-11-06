@@ -1,5 +1,5 @@
-from django.utils import timezone
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.utils import timezone
 
 # A little helper function, becase we will potentially have many PaginatedTypes
 # and we will potentially want to turn many querysets into paginated results:

@@ -1,7 +1,7 @@
 import graphene
 from django.contrib.auth.models import User
 
-from api_graphql.utils import get_paginator, get_offset, get_public_posts, get_public_episodes
+from api_graphql.utils import get_offset, get_paginator, get_public_episodes, get_public_posts
 from data_models.crop import CropImages
 from data_models.models import Category, Episode, Post, Settings, Show
 
