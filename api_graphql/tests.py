@@ -12,6 +12,552 @@ def django_db_setup(django_db_setup, django_db_blocker):
 
 
 @pytest.mark.django_db
+def test_category_by_id(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        category(id:1) {
+            id,
+            name,
+            textColor,
+            backgroundColor
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_categories(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allCategories {
+            id,
+            name,
+            textColor,
+            backgroundColor
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_settings(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        settings {
+            chiefEditor,
+            about,
+            radioEditor,
+            privacyPolicy,
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_show_by_id(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        show(id:1) {
+            id
+            name
+            digasShowId
+            image
+            lead
+            content
+            categories {
+                id
+            }
+            slug
+            archived
+            createdAt
+            updatedAt
+            createdBy {
+                id
+            }
+            episodes {
+                id
+            }
+            posts {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_show_by_slug(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        show(slug:"program2") {
+            id
+            name
+            digasShowId
+            image
+            lead
+            content
+            categories {
+                id
+            }
+            slug
+            archived
+            createdAt
+            updatedAt
+            createdBy {
+                id
+            }
+            episodes {
+                id
+            }
+            posts {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_shows(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+            allShows {
+                id
+                name
+                digasShowId
+                image
+                lead
+                content
+                categories {
+                    id
+                }
+                slug
+                archived
+                createdAt
+                updatedAt
+                createdBy {
+                    id
+                }
+                episodes {
+                    id
+                }
+                posts {
+                    id
+                }
+            }
+        }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_shows_with_offset(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+            allShows(offset: 1) {
+                id
+                name
+                digasShowId
+                image
+                lead
+                content
+                categories {
+                    id
+                }
+                slug
+                archived
+                createdAt
+                updatedAt
+                createdBy {
+                    id
+                }
+                episodes {
+                    id
+                }
+                posts {
+                    id
+                }
+            }
+        }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_shows_with_count(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+            allShows(offset: 2, count:2) {
+                id
+                name
+                digasShowId
+                image
+                lead
+                content
+                categories {
+                    id
+                }
+                slug
+                archived
+                createdAt
+                updatedAt
+                createdBy {
+                    id
+                }
+                episodes {
+                    id
+                }
+                posts {
+                    id
+                }
+            }
+        }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_episode_by_id(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        episode(id:1) {
+            id
+            title
+            lead
+            digasBroadcastId
+            digasShowId
+            categories {
+                id
+            }
+            show {
+                id
+            }
+            createdAt
+            updatedAt
+            publishAt
+            createdBy {
+                id
+            }
+            podcastUrl
+            onDemandUrl
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_episodes(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allEpisodes {
+            id
+            title
+            lead
+            digasBroadcastId
+            digasShowId
+            categories {
+                id
+            }
+            show {
+                id
+            }
+            createdAt
+            updatedAt
+            publishAt
+            createdBy {
+                id
+            }
+            podcastUrl
+            onDemandUrl
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_episodes_with_offset(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allEpisodes(offset:1) {
+            id
+            title
+            lead
+            digasBroadcastId
+            digasShowId
+            categories {
+                id
+            }
+            show {
+                id
+            }
+            createdAt
+            updatedAt
+            publishAt
+            createdBy {
+                id
+            }
+            podcastUrl
+            onDemandUrl
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_episodes_with_count(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allEpisodes(offset:1,count:2) {
+            id
+            title
+            lead
+            digasBroadcastId
+            digasShowId
+            categories {
+                id
+            }
+            show {
+                id
+            }
+            createdAt
+            updatedAt
+            publishAt
+            createdBy {
+                id
+            }
+            podcastUrl
+            onDemandUrl
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_post_by_id(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        post(id:2) {
+            id
+            title
+            slug
+            image
+            croppedImages {
+                large
+                medium
+                small
+                thumbnail
+            }
+            lead
+            content
+            categories {
+                id
+            }
+            deleted
+            episodes {
+                id
+            }
+            show {
+                id
+            }
+            publishAt
+            createdBy {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_post_by_slug(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        post(slug:"den-forste-artikkelen") {
+            id
+            title
+            slug
+            image
+            croppedImages {
+                large
+                medium
+                small
+                thumbnail
+            }
+            lead
+            content
+            categories {
+                id
+            }
+            deleted
+            episodes {
+                id
+            }
+            show {
+                id
+            }
+            publishAt
+            createdBy {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_posts(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allPosts {
+            id
+            title
+            slug
+            image
+            croppedImages {
+                large
+                medium
+                small
+                thumbnail
+            }
+            lead
+            content
+            categories {
+                id
+            }
+            deleted
+            episodes {
+                id
+            }
+            show {
+                id
+            }
+            publishAt
+            createdBy {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_posts_with_offset(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allPosts(offset:3) {
+            id
+            title
+            slug
+            image
+            croppedImages {
+                large
+                medium
+                small
+                thumbnail
+            }
+            lead
+            content
+            categories {
+                id
+            }
+            deleted
+            episodes {
+                id
+            }
+            show {
+                id
+            }
+            publishAt
+            createdBy {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_posts_with_count(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allPosts(offset:3,count:5) {
+            id
+            title
+            slug
+            image
+            croppedImages {
+                large
+                medium
+                small
+                thumbnail
+            }
+            lead
+            content
+            categories {
+                id
+            }
+            deleted
+            episodes {
+                id
+            }
+            show {
+                id
+            }
+            publishAt
+            createdBy {
+                id
+            }
+        }
+    }''')
+
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_user_by_id(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        user(id:1) {
+            id
+            fullName
+            publications {
+                id
+            }
+        }
+    }''')
+    snapshot.assert_match(executed)
+
+
+@pytest.mark.django_db
+def test_all_users(snapshot):
+    client = Client(schema)
+    executed = client.execute('''query {
+        allUsers {
+            id
+            fullName
+            publications {
+                id
+            }
+        }
+    }''')
+    snapshot.assert_match(executed)
+
+
+# DEPRECATED
+@pytest.mark.django_db
 def test_frontpage(snapshot):
     client = Client(schema)
     executed = client.execute('''query {
@@ -36,167 +582,7 @@ def test_frontpage(snapshot):
     snapshot.assert_match(executed)
 
 
-@pytest.mark.django_db
-def test_post_by_slug(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        post(slug:"den-forste-artikkelen") {
-        id,
-        title,
-        content,
-        publishAt,
-        createdBy {
-            fullName
-        },
-        show{
-            name,
-            slug
-        },
-        categories{
-            name,
-            textColor,
-            backgroundColor
-        },
-        episodes {
-            id,
-            title,
-            lead,
-        }
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_settings(snapshot):
-    client = Client(schema)
-
-    executed = client.execute('''query {
-        settings {
-            chief_editor,
-            about,
-            radio_editor,
-            privacy_policy,
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_episode_by_id(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        episode(id:1) {
-        id,
-        show {
-            name,
-            episodes {
-            id,
-            title,
-            onDemandUrl
-            }
-        }
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_show_by_slug(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        show(slug:"program2") {
-        id,
-        name,
-        image,
-        content,
-        lead,
-        archived,
-        episodes {
-            id,
-            title,
-            lead,
-            publishAt,
-        },
-        posts {
-            id,
-            title,
-            slug,
-            croppedImages {
-            large,
-            medium,
-            small
-            },
-            publishAt,
-            lead,
-            createdBy {
-            fullName
-            }
-        }
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_all_shows(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        allShows {
-        id,
-        name,
-        image,
-        lead,
-        slug,
-        archived
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_all_categories(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        allCategories {
-            id,
-            name,
-            textColor,
-            backgroundColor
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_category_by_id(snapshot):
-    client = Client(schema)
-    executed = client.execute('''query {
-        category(id:1) {
-            id,
-            name,
-            textColor,
-            backgroundColor
-        }
-    }''')
-
-    snapshot.assert_match(executed)
-
-
-@pytest.mark.django_db
-def test_url_all_shows(client, snapshot):
-    response = client.get('/graphql?query=query%20{%20allShows%20{%20id%20}%20}')
-
-    assert response.status_code == 200
-    snapshot.assert_match(response.content)
-
-
+# DEPRECATED
 @pytest.mark.django_db
 def test_paginated_posts(client, snapshot):
     client = Client(schema)

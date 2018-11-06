@@ -380,7 +380,10 @@
     "model": "data_models.settings",
     "pk": 1,
     "fields": {
-      "about": "<p>About text</p>"
+      "about": "<p>About text</p>",
+      "privacy_policy": "<div>privacy policy </div>",
+      "chief_editor": "chief editor",
+      "radio_editor": "radio editor"
     }
   },
   {
@@ -411,6 +414,38 @@
       "archived": false,
       "created_at": "2018-02-23T21:29:54.395Z",
       "updated_at": "2018-02-23T21:29:54.395Z",
+      "created_by": 2,
+      "categories": []
+    }
+  },
+  {
+    "model": "data_models.show",
+    "pk": 3,
+    "fields": {
+      "name": "Program3",
+      "slug": "program3",
+      "image": "uploads/images/300x300_9U7yu4U.png",
+      "lead": "Program3 beskrivelse",
+      "content": "<p>Program3 lenger beskrivelse!</p>",
+      "archived": false,
+      "created_at": "2018-03-23T21:29:54.395Z",
+      "updated_at": "2018-03-23T21:29:54.395Z",
+      "created_by": 2,
+      "categories": []
+    }
+  },
+  {
+    "model": "data_models.show",
+    "pk": 4,
+    "fields": {
+      "name": "Program4",
+      "slug": "program4",
+      "image": "uploads/images/300x300_9U7yu4U.png",
+      "lead": "Program4 beskrivelse",
+      "content": "<p>Program4 lenger beskrivelse!</p>",
+      "archived": false,
+      "created_at": "2018-03-23T21:29:54.395Z",
+      "updated_at": "2018-03-23T21:29:54.395Z",
       "created_by": 2,
       "categories": []
     }
@@ -484,6 +519,7 @@
       "content":"<p>Enda mer tekst!</p>",
       "deleted":false,
       "show":2,
+      "ready_to_be_published": true,
       "publish_at":"2018-02-23T21:30:30Z",
       "created_at":"2018-02-23T21:33:01.592Z",
       "updated_at":"2018-02-23T21:33:01.595Z",
@@ -832,123 +868,6 @@
       "categories":[
         1
       ]
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 1,
-    "fields": {
-      "action_time": "2018-02-23T21:24:45.359Z",
-      "user": 1,
-      "content_type": 2,
-      "object_id": "2",
-      "object_repr": "user",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 2,
-    "fields": {
-      "action_time": "2018-02-23T21:27:36.663Z",
-      "user": 1,
-      "content_type": 2,
-      "object_id": "2",
-      "object_repr": "user",
-      "action_flag": 2,
-      "change_message": "[{\"changed\": {\"fields\": [\"first_name\", \"last_name\", \"email\"]}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 3,
-    "fields": {
-      "action_time": "2018-02-23T21:29:09.256Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "1",
-      "object_repr": "Program1",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 4,
-    "fields": {
-      "action_time": "2018-02-23T21:29:54.404Z",
-      "user": 1,
-      "content_type": 8,
-      "object_id": "2",
-      "object_repr": "Program2",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 5,
-    "fields": {
-      "action_time": "2018-02-23T21:30:07.172Z",
-      "user": 1,
-      "content_type": 9,
-      "object_id": "1",
-      "object_repr": "Radio",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 6,
-    "fields": {
-      "action_time": "2018-02-23T21:30:49.256Z",
-      "user": 1,
-      "content_type": 10,
-      "object_id": "1",
-      "object_repr": "Episode1",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 7,
-    "fields": {
-      "action_time": "2018-02-23T21:31:21.828Z",
-      "user": 1,
-      "content_type": 10,
-      "object_id": "2",
-      "object_repr": "Episode2",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 8,
-    "fields": {
-      "action_time": "2018-02-23T21:32:30.505Z",
-      "user": 1,
-      "content_type": 7,
-      "object_id": "1",
-      "object_repr": "Den f\u00f8rste artikkelen",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
-    }
-  },
-  {
-    "model": "admin.logentry",
-    "pk": 9,
-    "fields": {
-      "action_time": "2018-02-23T21:33:01.658Z",
-      "user": 1,
-      "content_type": 7,
-      "object_id": "2",
-      "object_repr": "Den andre artikkelen",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
     }
   }
 ]
