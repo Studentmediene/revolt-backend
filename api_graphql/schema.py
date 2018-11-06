@@ -1,8 +1,7 @@
 import graphene
 from django.contrib.auth.models import User
-from django.utils import timezone
 
-from api_graphql.utils import get_paginator
+from api_graphql.utils import get_paginator, get_offset, get_public_posts, get_public_episodes
 from data_models.crop import CropImages
 from data_models.models import Category, Episode, Post, Settings, Show
 
@@ -60,7 +59,7 @@ class PostType(graphene.ObjectType):
 
     @staticmethod
     def resolve_episodes(post, info):
-        return post.episodes.all()
+        return get_public_episodes(post.episodes)
 
     @staticmethod
     def resolve_created_by(post, info):
@@ -113,13 +112,11 @@ class ShowType(graphene.ObjectType):
 
     @staticmethod
     def resolve_episodes(show, info):
-        return show.episodes \
-            .order_by('-publish_at') \
-            .filter(publish_at__lte=timezone.now())
+        return get_public_episodes(show.episodes)
 
     @staticmethod
     def resolve_posts(show, info):
-        return show.posts.order_by('-created_at')
+        return get_public_posts(show.posts)
 
     @staticmethod
     def resolve_image(show, info):
@@ -180,7 +177,7 @@ class UserType(graphene.ObjectType):
 
     @staticmethod
     def resolve_publications(user, info):
-        return user.publications.order_by('-created_at')
+        return get_public_posts(user.publications)
 
     @staticmethod
     def resolve_full_name(user, info):
@@ -212,11 +209,11 @@ class Query(graphene.ObjectType):
 
     show = graphene.Field(ShowType, id=graphene.Int(), slug=graphene.String())
 
-    all_shows = graphene.List(ShowType)
+    all_shows = graphene.List(ShowType, offset=graphene.Int(), count=graphene.Int())
 
     episode = graphene.Field(EpisodeType, id=graphene.Int())
 
-    all_episodes = graphene.List(EpisodeType)
+    all_episodes = graphene.List(EpisodeType, offset=graphene.Int(), count=graphene.Int())
 
     post = graphene.Field(PostType, id=graphene.Int(), slug=graphene.String())
 
@@ -254,59 +251,40 @@ class Query(graphene.ObjectType):
         return Show.objects.get(slug=slug)
 
     @staticmethod
-    def resolve_all_shows(root, info):
-        return Show.objects.all()
+    def resolve_all_shows(root, info, offset=0, count=None):
+        shows = Show.objects.all()
+        return get_offset(shows, offset, count)
 
     @staticmethod
     def resolve_episode(root, info, id):
-        episode = Episode.objects.get(pk=id)
-        if episode.publish_at >= timezone.now():
-            raise Episode.DoesNotExist('Episode matching query does not exist.')
-        else:
-            return episode
+        return get_public_episodes(Episode.objects).get(pk=id)
 
     @staticmethod
-    def resolve_all_episodes(root, info):
-        return Episode.objects \
-            .order_by('-publish_at') \
-            .filter(publish_at__lte=timezone.now())
+    def resolve_all_episodes(root, info, offset=0, count=None):
+        episodes = get_public_episodes(Episode.objects)
+        return get_offset(episodes, offset, count)
 
     @staticmethod
     def resolve_post(root, info, id=None, slug=None):
-        post = Post.objects \
-            .filter(publish_at__lte=timezone.now()) \
-            .filter(ready_to_be_published=True)
+        post = get_public_posts(Post.objects)
         if id:
             return post.get(pk=id)
-        else:
-            return post.get(slug=slug)
+        return post.get(slug=slug)
 
     @staticmethod
     def resolve_all_posts(root, info, offset=0, count=None):
-        posts = Post.objects \
-            .order_by('-publish_at') \
-            .filter(publish_at__lte=timezone.now()) \
-            .filter(ready_to_be_published=True)
-        if count:
-            return posts[offset:offset + count]
-        else:
-            return posts[offset:]
+        posts = get_public_posts(Post.objects)
+        return get_offset(posts, offset, count)
 
     # DEPRECATED
     @staticmethod
     def resolve_front_page_posts(root, info):
-        return Post.objects \
-            .order_by('-publish_at') \
-            .filter(publish_at__lte=timezone.now()) \
-            .filter(ready_to_be_published=True)[:30]
+        return get_public_posts(Post.objects)[:30]
 
     # DEPRECATED
     @staticmethod
     def resolve_paginated_posts(self, info, page, page_size=10):
-        qs = Post.objects \
-            .order_by('-publish_at') \
-            .filter(publish_at__lte=timezone.now()) \
-            .filter(ready_to_be_published=True)
+        qs = get_public_posts(Post.objects)
         return get_paginator(qs, page_size, page, PostPaginatedType)
 
     @staticmethod
