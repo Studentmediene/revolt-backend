@@ -78,7 +78,7 @@ class Episode(models.Model):
         verbose_name_plural = "Episoder"
         ordering = ['-created_at']
 
-    title = models.CharField('Tittel', max_length=64)
+    title = models.CharField('Tittel', max_length=250)
     use_title = models.BooleanField(
         'Bruk tittel',
         default=False,
@@ -119,7 +119,7 @@ class Post(models.Model):
         verbose_name_plural = "Artikler"
         ordering = ['-publish_at']
 
-    title = models.CharField('Tittel', max_length=64)
+    title = models.CharField('Tittel', max_length=200)
     slug = AutoSlugField(populate_from=['title'])
     image = models.ImageField('Bilde', upload_to='uploads/images')
     cropping = ImageRatioField(
