@@ -7,9 +7,6 @@ from data_models.models import Category, Episode, Post, Settings, Show
 
 
 class CategoryType(graphene.ObjectType):
-    """
-    Category description
-    """
 
     id = graphene.Int()
     name = graphene.String()
@@ -23,13 +20,11 @@ class SettingsType(graphene.ObjectType):
     about = graphene.String()
     chief_editor = graphene.String()
     radio_editor = graphene.String()
+    music_producer = graphene.String()
     privacy_policy = graphene.String()
 
 
 class PostType(graphene.ObjectType):
-    """
-    Post description
-    """
 
     id = graphene.Int()
     title = graphene.String()
@@ -79,9 +74,6 @@ class PostPaginatedType(graphene.ObjectType):
 
 
 class ShowType(graphene.ObjectType):
-    """
-    Show description
-    """
 
     id = graphene.Int()
     name = graphene.String()
