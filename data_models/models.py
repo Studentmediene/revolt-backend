@@ -51,7 +51,7 @@ class Show(models.Model):
     name = models.CharField('Navn', max_length=64, unique=True)
     slug = AutoSlugField(populate_from=['name'])
     image = models.ImageField('Programlogo', upload_to='uploads/images')
-    lead = models.CharField('Kort beskrivelse', max_length=140)
+    lead = models.TextField('Kort beskrivelse', max_length=255)
     content = models.TextField('Lang beskrivelse')
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
@@ -85,7 +85,7 @@ class Episode(models.Model):
         default=False,
         help_text='Vis tittelen på episoden. ' +
         'Om ikke tittel benyttes vises "Navn på show" + "Publiseringsdato"')
-    lead = models.CharField('Beskrivelse', max_length=140)
+    lead = models.TextField('Beskrivelse')
 
     show = models.ForeignKey(
         Show,

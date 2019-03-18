@@ -53,6 +53,23 @@ class SettingsAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class ShowAdminForm(forms.ModelForm):
+    content = forms.CharField(
+        widget=CKEditorUploadingWidget(config_name='small'), label='Lang beskrivelse')
+
+    class Meta:
+        model = Show
+        fields = '__all__'
+
+
+class EpisodeAdminForm(forms.ModelForm):
+    lead = forms.CharField(widget=CKEditorUploadingWidget(config_name='small'), label='Beskrivelse')
+
+    class Meta:
+        model = Episode
+        fields = '__all__'
+
+
 @admin.register(Post)
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'show', 'publish_at', 'ready_to_be_published', 'deleted')
@@ -91,13 +108,7 @@ class ShowAdmin(admin.ModelAdmin):
     list_filter = ('archived', )
     ordering = ('archived', 'name')
     search_fields = ('name', )
-
-    # Set form field for "lead" to Textarea instead of Textinput
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        formfield = super(ShowAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        if db_field.name == 'lead':
-            formfield.widget = forms.Textarea(attrs={'cols': 40, 'rows': 3})
-        return formfield
+    form = ShowAdminForm
 
 
 @admin.register(Episode)
@@ -105,10 +116,4 @@ class EpisodeAdmin(admin.ModelAdmin):
     list_display = ('title', 'show', 'publish_at')
     list_filter = (ActiveShowFilter, ArchivedShowFilter)
     search_fields = ('title', 'show__name')
-
-    # Set form field for "lead" to Textarea instead of Textinput
-    def formfield_for_dbfield(self, db_field, **kwargs):
-        formfield = super(EpisodeAdmin, self).formfield_for_dbfield(db_field, **kwargs)
-        if db_field.name == 'lead':
-            formfield.widget = forms.Textarea(attrs={'cols': 60, 'rows': 5})
-        return formfield
+    form = EpisodeAdminForm

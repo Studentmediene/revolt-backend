@@ -216,6 +216,72 @@ CKEDITOR_CONFIGS = {
             'dialogui',
             'elementspath'
         ]),
+    },
+    'small': {
+        'toolbar_Article': [
+            {
+                'name': 'styles',
+                'items': ['Styles', 'Format', 'FontSize', 'Source', '-', 'ShowBlocks', 'Maximize'],
+            },
+            '/',
+            {
+                'name': 'justify',
+                'items': ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            },
+            {
+                'name':
+                'basicstyles',
+                'items': [
+                    'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript',
+                    'Blockquote', '-', 'RemoveFormat'
+                ],
+            },
+            {
+                'name': 'colors',
+                'items': ['TextColor', 'BGColor'],
+            },
+            {
+                'name': 'clipboard',
+                'items': ['Cut', 'Copy', 'SelectAll', '-', 'Undo', 'Redo'],
+            },
+            '/',
+            {
+                'name': 'paragraph',
+                'items': ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+            },
+            {
+                'name': 'links',
+                'items': ['Link', 'Unlink', 'Anchor']
+            },
+        ],
+        'toolbar':
+        'Article',
+        'height':
+        300,
+        'width':
+        600,
+        'forcePasteAsPlainText':
+        True,
+        'font_names':
+        'Arial/Arial, Helvetica, sans-serif',
+        'font_defaultLabel':
+        'Arial',
+        'tabSpaces':
+        4,
+        'contentsCss':
+        '/static/ckeditor/editor.css',
+        'extraPlugins':
+        ','.join([
+            # your extra plugins here
+            'autolink',
+            # 'devtools',
+            'widget',
+            'lineutils',
+            'clipboard',
+            'dialog',
+            'dialogui',
+            'elementspath'
+        ]),
     }
 }
 
