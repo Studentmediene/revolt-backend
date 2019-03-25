@@ -2,6 +2,7 @@ from datetime import datetime
 
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from solo.models import SingletonModel
@@ -171,3 +172,16 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return '/post/' + self.slug
+
+
+class HighlightedPost(SingletonModel):
+    class Meta:
+        verbose_name = 'Fremhevede artikler'
+
+    posts = models.ManyToManyField(
+        Post,
+        blank=True,
+        verbose_name='Artikler',
+        limit_choices_to={'ready_to_be_published': True},
+        help_text='Legg til artikler som skal fremheves på forsiden. Maksimalt 5 artikler.<br>' + 
+            'Dukker ikke artikkelen opp? Har du husket å markere den som "Klar til publisering"?<br>')

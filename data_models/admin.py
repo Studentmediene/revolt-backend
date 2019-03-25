@@ -4,7 +4,7 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from sorl_cropping import ImageCroppingMixin
 
-from .models import Category, Episode, Post, Settings, Show
+from .models import Category, Episode, Post, Settings, Show, HighlightedPost
 
 
 class ShowFilter(admin.SimpleListFilter):
@@ -70,6 +70,17 @@ class EpisodeAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+class HighlightedPostAdminForm(forms.ModelForm):
+    def clean_posts(self):
+        posts = self.cleaned_data['posts']
+        if len(posts) > 5:
+            raise forms.ValidationError("Du kan ikke fremheve mer enn 5 artikler.")
+        return posts
+    class Meta:
+        model = HighlightedPost
+        fields = '__all__'
+
+
 @admin.register(Post)
 class PostAdmin(ImageCroppingMixin, admin.ModelAdmin):
     list_display = ('title', 'show', 'publish_at', 'ready_to_be_published', 'deleted')
@@ -117,3 +128,8 @@ class EpisodeAdmin(admin.ModelAdmin):
     list_filter = (ActiveShowFilter, ArchivedShowFilter)
     search_fields = ('title', 'show__name')
     form = EpisodeAdminForm
+
+
+@admin.register(HighlightedPost)
+class HighlightedPostAdmin(SingletonModelAdmin):
+    form = HighlightedPostAdminForm
