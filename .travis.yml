@@ -1,17 +1,15 @@
-language: python
-python:
-  - "3.5"
+language: generic
+sudo: required
+services:
+  - docker
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - flake8 api_graphql app data_models
-  - yapf -pdr api_graphql app data_models -e '**/migrations' -e '**/snapshots'
-  - isort -c -rc api_graphql app data_models
-  - py.test --cov-report=xml
+  - docker-compose run test
 after_script:
-  - ./cc-test-reporter after-build
+  - docker-compose run test ./cc-test-reporter after-build
 env:
   global:
     - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)

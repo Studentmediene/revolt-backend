@@ -1,0 +1,46 @@
+version: '3.4'
+services:
+  test:
+    build:
+      context: .
+      target: test
+      dockerfile: Dockerfile
+    volumes:
+      - .:/srv/app/
+    environment:
+      - GIT_COMMITTED_AT
+      - CC_TEST_REPORTER_ID
+  dev:
+    build:
+      context: .
+      target: dev
+      dockerfile: Dockerfile
+    volumes:
+      - .:/srv/app/
+    ports:
+      - "8000:8000"
+    environment:
+      - REVOLT_DEBUG
+      - REVOLT_ALLOWED_HOSTS
+      - REVOLT_STATIC_ROOT
+      - REVOLT_MEDIA_ROOT
+      - REVOLT_SECRET_KEY
+      - REVOLT_RAVEN_DSN
+      - DATABASE_URL
+  production:
+    build:
+      context: .
+      target: production
+      dockerfile: Dockerfile
+    volumes:
+      - .:/srv/app/
+    ports:
+      - "8000:8000"
+    environment:
+      - REVOLT_DEBUG=false
+      - REVOLT_ALLOWED_HOSTS
+      - REVOLT_STATIC_ROOT
+      - REVOLT_MEDIA_ROOT
+      - REVOLT_SECRET_KEY
+      - REVOLT_RAVEN_DSN
+      - DATABASE_URL

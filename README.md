@@ -19,10 +19,26 @@ By default settings are configured for development and should just work, but som
 |REVOLT_SECRET_KEY|replace_this_secret_key|[See Django SECRET_KEY](https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-SECRET_KEY). **It is important that this is changed in production.**
 |REVOLT_RAVEN_DSN|(Empty)|Sentry DSN using this format: https://user:pass@sentry.io/project|
 
+## Testing and linting
+
+The projects uses flake8, yapf, and isort to lint the project.
+
+The easiest way to run the tests is to use Docker: `docker-compose run test`.  
+Alternatively use the docker script: `./docker/run_tests.sh`.
 
 ## Setup - Development
 
+### Docker
+
+To start the project using Docker run `docker-compose up dev` which runs on http://localhost:8000  
+To update requirements run `docker-compose up --build dev`.  
+Migrations are automatically applied on start up. 
+
+No further changes are needed to run the backend for development.
+
 ### Virtualenv
+
+To run the project without using Docker virtualenv is recommended. 
 
 ```bash
 pip install virtualenv
@@ -65,6 +81,14 @@ pytest
 ```
 
 ## Setup - Deployment
+
+### Docker
+
+Docker can be used to run the backend in production. 
+It is configured to use uwsgi on port 800.
+Staticfiles and mediafiles are served from local folders with the same name.
+
+Start the backend using `docker-compose up production`.
 
 ### Nginx
 
