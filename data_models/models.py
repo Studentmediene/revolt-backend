@@ -184,3 +184,9 @@ class HighlightedPost(SingletonModel):
         limit_choices_to={'ready_to_be_published': True},
         help_text='Legg til artikler som skal fremheves på forsiden. Maksimalt 5 artikler.<br>' +
         'Dukker ikke artikkelen opp? Har du husket å markere den som "Klar til publisering"?<br>')
+
+    def __unicode__(self):
+        return 'Fremhevede artikler'
+
+    def __str__(self):
+        return str(self.__unicode__())
