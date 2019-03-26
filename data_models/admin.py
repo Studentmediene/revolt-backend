@@ -4,7 +4,7 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from sorl_cropping import ImageCroppingMixin
 
-from .models import Category, Episode, Post, Settings, Show, HighlightedPost
+from .models import Category, Episode, HighlightedPost, Post, Settings, Show
 
 
 class ShowFilter(admin.SimpleListFilter):
@@ -76,6 +76,7 @@ class HighlightedPostAdminForm(forms.ModelForm):
         if len(posts) > 5:
             raise forms.ValidationError("Du kan ikke fremheve mer enn 5 artikler.")
         return posts
+
     class Meta:
         model = HighlightedPost
         fields = '__all__'
