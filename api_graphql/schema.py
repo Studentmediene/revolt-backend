@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 from api_graphql.utils import get_offset, get_paginator, get_public_episodes, get_public_posts
 from data_models.crop import CropImages
-from data_models.models import Category, Episode, Post, Settings, Show
+from data_models.models import Category, Episode, HighlightedPost, Post, Settings, Show
 
 
 class CategoryType(graphene.ObjectType):
@@ -211,6 +211,8 @@ class Query(graphene.ObjectType):
 
     all_posts = graphene.List(PostType, offset=graphene.Int(), count=graphene.Int())
 
+    highlighted_posts = graphene.List(PostType)
+
     # DEPRECATED
     paginated_posts = graphene.Field(
         PostPaginatedType, page=graphene.Int(), page_size=graphene.Int())
@@ -267,6 +269,12 @@ class Query(graphene.ObjectType):
     def resolve_all_posts(root, info, offset=0, count=None):
         posts = get_public_posts(Post.objects)
         return get_offset(posts, offset, count)
+
+    @staticmethod
+    def resolve_highlighted_posts(root, info):
+        highlighted_posts = HighlightedPost.get_solo()
+        posts = get_public_posts(Post.objects).filter(highlightedpost=highlighted_posts)
+        return posts
 
     # DEPRECATED
     @staticmethod

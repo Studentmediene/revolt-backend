@@ -209,6 +209,11 @@ def test_all_posts_with_count(snapshot):
     assert_query(snapshot, post_query, 'allPosts(offset:3,count:5)')
 
 
+@pytest.mark.django_db
+def test_highlighted_posts(snapshot):
+    assert_query(snapshot, post_query, 'highlightedPosts')
+
+
 user_query = '''query {
     MODEL_NAME {
         id

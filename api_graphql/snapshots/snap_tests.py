@@ -915,3 +915,66 @@ snapshots['test_all_users 1'] = {
         ]
     }
 }
+
+snapshots['test_highlighted_posts 1'] = {
+    'data': {
+        'highlightedPosts': [
+            {
+                'categories': [
+                    {
+                        'id': 1
+                    }
+                ],
+                'content': '<p>Enda mer tekst!</p>',
+                'createdBy': {
+                    'id': 2
+                },
+                'croppedImages': {
+                    'large': '/media/cache/bf/0c/bf0c64d01f8854de77f44e8995bb6263.jpg',
+                    'medium': '/media/cache/b3/9c/b39c21c911d5cbfe60192fe818985a7e.jpg',
+                    'small': '/media/cache/8f/11/8f11ece1c53c8e55aadaa2cd700edcda.jpg',
+                    'thumbnail': '/media/cache/22/27/2227ce4a143ba45f0118c163462ef7a4.jpg'
+                },
+                'deleted': False,
+                'episodes': [
+                ],
+                'id': 2,
+                'image': 'uploads/images/700x350_HYkE6k8.png',
+                'lead': 'Enda en ingress',
+                'publishAt': '2018-02-23 21:30:30+00:00',
+                'show': {
+                    'id': 2
+                },
+                'slug': 'den-andre-artikkelen',
+                'title': 'Den andre artikkelen'
+            },
+            {
+                'categories': [
+                    {
+                        'id': 1
+                    }
+                ],
+                'content': '<p><b>Her</b> har vi teksten!</p>',
+                'createdBy': {
+                    'id': 2
+                },
+                'croppedImages': {
+                    'large': '/media/cache/9c/7e/9c7ec938cac65a0bac80a67542ccf3af.jpg',
+                    'medium': '/media/cache/0d/c6/0dc6a4cee46602608c70347932545628.jpg',
+                    'small': '/media/cache/00/f2/00f21860fb35fef4b16ed402b407f846.jpg',
+                    'thumbnail': '/media/cache/8e/8f/8e8fdbe3d759e3591c21d7d73effe9b6.jpg'
+                },
+                'deleted': False,
+                'episodes': [
+                ],
+                'id': 3,
+                'image': 'uploads/images/700x350.png',
+                'lead': 'Ingressen her',
+                'publishAt': '2018-02-23 21:29:29+00:00',
+                'show': None,
+                'slug': 'den-3rd-artikkelen',
+                'title': 'Den tredje artikkelen'
+            }
+        ]
+    }
+}

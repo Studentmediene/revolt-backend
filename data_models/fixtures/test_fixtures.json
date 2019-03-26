@@ -869,5 +869,15 @@
         1
       ]
     }
+  },
+  {
+    "model": "data_models.highlightedpost",
+    "pk": 1,
+    "fields": {
+      "posts": [
+        3,
+        2
+      ]
+    }
   }
 ]
