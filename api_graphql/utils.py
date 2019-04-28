@@ -1,10 +1,11 @@
+from datetime import timedelta
+
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils import timezone
 
+
 # A little helper function, becase we will potentially have many PaginatedTypes
 # and we will potentially want to turn many querysets into paginated results:
-
-
 # DEPRECATED
 def get_paginator(qs, page_size, page, paginated_type, **kwargs):
     p = Paginator(qs, page_size)
@@ -34,10 +35,15 @@ def get_public_posts(posts):
     return posts \
         .order_by('-publish_at') \
         .filter(publish_at__lte=timezone.now()) \
+        .filter(deleted=False) \
         .filter(ready_to_be_published=True)
 
 
 def get_public_episodes(episodes):
     return episodes \
         .order_by('-publish_at') \
-        .filter(publish_at__lte=timezone.now())
+        .filter(publish_at__lte=timezone.now()) \
+        .filter(publish_at__gte=timezone.now() - timedelta(days=730))
+    # Hide all episodes that are older than 2 years, because of license rights through TONO.
+    # We are not allowed to make old episodes with music available. In the future we are hopefully
+    # allowed to serve old episodes with music.
