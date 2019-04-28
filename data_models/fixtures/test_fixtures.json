@@ -399,7 +399,9 @@
       "created_at": "2018-02-23T21:29:09.247Z",
       "updated_at": "2018-02-23T21:29:09.247Z",
       "created_by": 2,
-      "categories": []
+      "categories": [],
+      "digas_id": 123,
+      "is_podcast": true
     }
   },
   {
@@ -415,7 +417,9 @@
       "created_at": "2018-02-23T21:29:54.395Z",
       "updated_at": "2018-02-23T21:29:54.395Z",
       "created_by": 2,
-      "categories": []
+      "categories": [],
+      "digas_id": 234,
+      "is_podcast": false
     }
   },
   {
@@ -431,7 +435,9 @@
       "created_at": "2018-03-23T21:29:54.395Z",
       "updated_at": "2018-03-23T21:29:54.395Z",
       "created_by": 2,
-      "categories": []
+      "categories": [],
+      "digas_id": null,
+      "is_podcast": false
     }
   },
   {
@@ -447,7 +453,9 @@
       "created_at": "2018-03-23T21:29:54.395Z",
       "updated_at": "2018-03-23T21:29:54.395Z",
       "created_by": 2,
-      "categories": []
+      "categories": [],
+      "digas_id": null,
+      "is_podcast": true
     }
   },
   {

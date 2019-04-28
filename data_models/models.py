@@ -62,6 +62,13 @@ class Show(models.Model):
         null=True
     )
 
+    is_podcast = models.BooleanField(
+        verbose_name='Programmet er en podkast',
+        default=False,
+        help_text='Podkaster får lenke til podkast-feeden, og (etterhvert) mulighet til å legge '
+        'inn podkast-episoder.<br/>Flere program kan markeres som podkast samtidig i '
+        'programlista.',
+    )
     archived = models.BooleanField('Arkivert', default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)

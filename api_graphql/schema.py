@@ -84,6 +84,7 @@ class ShowType(graphene.ObjectType):
     categories = graphene.List(lambda: CategoryType)
 
     slug = graphene.String()
+    is_podcast = graphene.Boolean()
     archived = graphene.Boolean()
 
     created_at = graphene.String()

@@ -147,11 +147,30 @@ class SettingsAdmin(SingletonModelAdmin):
 
 @admin.register(Show)
 class ShowAdmin(admin.ModelAdmin):
-    list_display = ('name', 'archived')
-    list_filter = ('archived', )
+    list_display = ('name', 'archived', 'is_podcast')
+    list_filter = ('archived', 'is_podcast')
     ordering = ('archived', 'name')
     search_fields = ('name', )
     form = ShowAdminForm
+    actions = ('make_podcast', 'unmake_podcast')
+
+    def make_podcast(self, request, queryset):
+        rows_updated = queryset.update(is_podcast=True)
+        self.message_user(
+            request,
+            '{} program(mer) ble markert som podkast'.format(rows_updated)
+        )
+
+    make_podcast.short_description = 'Marker som podkast'
+
+    def unmake_podcast(self, request, queryset):
+        rows_updated = queryset.update(is_podcast=False)
+        self.message_user(
+            request,
+            '{} program(mer) er ikke lenger markert som podkast'
+            .format(rows_updated)
+        )
+    unmake_podcast.short_description = 'Fjern podkast-markering'
 
 
 @admin.register(Episode)
