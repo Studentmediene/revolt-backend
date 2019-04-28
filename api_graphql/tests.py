@@ -56,7 +56,7 @@ show_query = '''query {
     MODEL_NAME {
         id
         name
-        digasShowId
+        digasId
         image
         lead
         content
