@@ -5,6 +5,7 @@ from solo.admin import SingletonModelAdmin
 from sorl_cropping import ImageCroppingMixin
 
 from .models import Category, Episode, HighlightedPost, Post, Settings, Show
+from . import rr_api
 
 
 class ShowFilter(admin.SimpleListFilter):
@@ -53,9 +54,38 @@ class SettingsAdminForm(forms.ModelForm):
         fields = '__all__'
 
 
+def get_show_options():
+    shows = rr_api.get_shows()
+
+    def process_shows(predicate):
+        filtered_shows = filter(predicate, shows)
+        as_choices = map(lambda s: (s['id'], s['name']), filtered_shows)
+        return tuple(as_choices)
+
+    # Filter into archived and active
+    old_shows = process_shows(lambda s: s['old'])
+    active_shows = process_shows(lambda s: not s['old'])
+
+    return (
+        (None, '--------'),
+        ('Aktive programmer', active_shows),
+        ('Arkivert', old_shows),
+    )
+
+
 class ShowAdminForm(forms.ModelForm):
     content = forms.CharField(
-        widget=CKEditorUploadingWidget(config_name='small'), label='Lang beskrivelse')
+        widget=CKEditorUploadingWidget(config_name='small'),
+        label='Lang beskrivelse'
+    )
+
+    digas_id = forms.TypedChoiceField(
+        coerce=int,
+        empty_value=None,
+        required=False,
+        label='Tilhørende Digas-program',
+        choices=get_show_options,
+    )
 
     class Meta:
         model = Show

@@ -92,7 +92,7 @@ snapshots['test_show_by_slug 1'] = {
             'createdBy': {
                 'id': 2
             },
-            'digasShowId': None,
+            'digasId': None,
             'episodes': [
                 {
                     'id': 2
@@ -125,7 +125,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                     {
                         'id': 1
@@ -149,7 +149,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                     {
                         'id': 2
@@ -176,7 +176,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 3,
@@ -197,7 +197,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 4,
@@ -400,7 +400,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                     {
                         'id': 2
@@ -427,7 +427,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 3,
@@ -448,7 +448,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 4,
@@ -476,7 +476,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 3,
@@ -497,7 +497,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasShowId': None,
+                'digasId': None,
                 'episodes': [
                 ],
                 'id': 4,
@@ -524,7 +524,7 @@ snapshots['test_show_by_id 1'] = {
             'createdBy': {
                 'id': 2
             },
-            'digasShowId': None,
+            'digasId': None,
             'episodes': [
                 {
                     'id': 1
