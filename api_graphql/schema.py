@@ -77,7 +77,7 @@ class ShowType(graphene.ObjectType):
 
     id = graphene.Int()
     name = graphene.String()
-    digas_show_id = graphene.Int()
+    digas_id = graphene.Int()
     image = graphene.String()
     lead = graphene.String()
     content = graphene.String()

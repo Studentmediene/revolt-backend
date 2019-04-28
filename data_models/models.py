@@ -56,6 +56,12 @@ class Show(models.Model):
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
 
+    digas_id = models.IntegerField(
+        verbose_name='Tilhørende Digas-program',
+        unique=True,
+        null=True
+    )
+
     archived = models.BooleanField('Arkivert', default=False)
 
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
