@@ -64,6 +64,7 @@ show_query = '''query {
             id
         }
         slug
+        isPodcast
         archived
         createdAt
         updatedAt

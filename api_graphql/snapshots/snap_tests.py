@@ -92,7 +92,7 @@ snapshots['test_show_by_slug 1'] = {
             'createdBy': {
                 'id': 2
             },
-            'digasId': None,
+            'digasId': 234,
             'episodes': [
                 {
                     'id': 2
@@ -100,6 +100,7 @@ snapshots['test_show_by_slug 1'] = {
             ],
             'id': 2,
             'image': '/media/uploads/images/300x300_9U7yu4U.png',
+            'isPodcast': False,
             'lead': 'Program2 beskrivelse',
             'name': 'Program2',
             'posts': [
@@ -125,7 +126,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasId': None,
+                'digasId': 123,
                 'episodes': [
                     {
                         'id': 1
@@ -133,6 +134,7 @@ snapshots['test_all_shows 1'] = {
                 ],
                 'id': 1,
                 'image': '/media/uploads/images/300x300.png',
+                'isPodcast': True,
                 'lead': 'Program1 beskrivelse',
                 'name': 'Program1',
                 'posts': [
@@ -149,7 +151,7 @@ snapshots['test_all_shows 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasId': None,
+                'digasId': 234,
                 'episodes': [
                     {
                         'id': 2
@@ -157,6 +159,7 @@ snapshots['test_all_shows 1'] = {
                 ],
                 'id': 2,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': False,
                 'lead': 'Program2 beskrivelse',
                 'name': 'Program2',
                 'posts': [
@@ -181,6 +184,7 @@ snapshots['test_all_shows 1'] = {
                 ],
                 'id': 3,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
                 'posts': [
@@ -202,6 +206,7 @@ snapshots['test_all_shows 1'] = {
                 ],
                 'id': 4,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
                 'posts': [
@@ -400,7 +405,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'createdBy': {
                     'id': 2
                 },
-                'digasId': None,
+                'digasId': 234,
                 'episodes': [
                     {
                         'id': 2
@@ -408,6 +413,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 ],
                 'id': 2,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': False,
                 'lead': 'Program2 beskrivelse',
                 'name': 'Program2',
                 'posts': [
@@ -432,6 +438,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 ],
                 'id': 3,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
                 'posts': [
@@ -453,6 +460,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 ],
                 'id': 4,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
                 'posts': [
@@ -481,6 +489,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 ],
                 'id': 3,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
                 'posts': [
@@ -502,6 +511,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 ],
                 'id': 4,
                 'image': '/media/uploads/images/300x300_9U7yu4U.png',
+                'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
                 'posts': [
@@ -524,7 +534,7 @@ snapshots['test_show_by_id 1'] = {
             'createdBy': {
                 'id': 2
             },
-            'digasId': None,
+            'digasId': 123,
             'episodes': [
                 {
                     'id': 1
@@ -532,6 +542,7 @@ snapshots['test_show_by_id 1'] = {
             ],
             'id': 1,
             'image': '/media/uploads/images/300x300.png',
+            'isPodcast': True,
             'lead': 'Program1 beskrivelse',
             'name': 'Program1',
             'posts': [
