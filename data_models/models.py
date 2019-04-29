@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime
 
 from colorfield.fields import ColorField
@@ -6,6 +7,10 @@ from django.db import models
 from django_extensions.db.fields import AutoSlugField
 from solo.models import SingletonModel
 from sorl_cropping import ImageRatioField
+
+from data_models.rr_api import get_podcast_url_from_digas_id
+
+log = logging.getLogger(__name__)
 
 
 class Category(models.Model):
@@ -56,11 +61,7 @@ class Show(models.Model):
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
 
-    digas_id = models.IntegerField(
-        verbose_name='Tilhørende Digas-program',
-        unique=True,
-        null=True
-    )
+    digas_id = models.IntegerField(verbose_name='Tilhørende Digas-program', unique=True, null=True)
 
     is_podcast = models.BooleanField(
         verbose_name='Programmet er en podkast',
@@ -68,6 +69,13 @@ class Show(models.Model):
         help_text='Podkaster får lenke til podkast-feeden, og (etterhvert) mulighet til å legge '
         'inn podkast-episoder.<br/>Flere program kan markeres som podkast samtidig i '
         'programlista.',
+    )
+    podcast_url = models.CharField(
+        'Podkast-URL',
+        max_length=100,
+        default=None,
+        editable=False,
+        null=True,
     )
     archived = models.BooleanField('Arkivert', default=False)
 
@@ -84,6 +92,21 @@ class Show(models.Model):
 
     def get_absolute_url(self):
         return '/programmer/' + self.slug
+
+    def save(self, *args, **kwargs):
+        if self.digas_id is not None:
+            # Update even if is_podcast is False, because this trigger is not
+            # run for bulk updates, which is exactly what can set is_podcast to
+            # True (when using the "Mark as podcast" action).
+            try:
+                self.podcast_url = get_podcast_url_from_digas_id(self.digas_id)
+            except Exception:
+                log.exception('Error occurred while trying to update podcast_url for {}. '
+                              'Not updating podcast_url this time.'.format(self.name))
+        else:
+            self.podcast_url = None
+
+        super().save(*args, **kwargs)
 
 
 class Episode(models.Model):

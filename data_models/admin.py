@@ -4,8 +4,8 @@ from django.contrib import admin
 from solo.admin import SingletonModelAdmin
 from sorl_cropping import ImageCroppingMixin
 
-from .models import Category, Episode, HighlightedPost, Post, Settings, Show
 from . import rr_api
+from .models import Category, Episode, HighlightedPost, Post, Settings, Show
 
 
 class ShowFilter(admin.SimpleListFilter):
@@ -75,9 +75,7 @@ def get_show_options():
 
 class ShowAdminForm(forms.ModelForm):
     content = forms.CharField(
-        widget=CKEditorUploadingWidget(config_name='small'),
-        label='Lang beskrivelse'
-    )
+        widget=CKEditorUploadingWidget(config_name='small'), label='Lang beskrivelse')
 
     digas_id = forms.TypedChoiceField(
         coerce=int,
@@ -156,20 +154,15 @@ class ShowAdmin(admin.ModelAdmin):
 
     def make_podcast(self, request, queryset):
         rows_updated = queryset.update(is_podcast=True)
-        self.message_user(
-            request,
-            '{} program(mer) ble markert som podkast'.format(rows_updated)
-        )
+        self.message_user(request, '{} program(mer) ble markert som podkast'.format(rows_updated))
 
     make_podcast.short_description = 'Marker som podkast'
 
     def unmake_podcast(self, request, queryset):
         rows_updated = queryset.update(is_podcast=False)
-        self.message_user(
-            request,
-            '{} program(mer) er ikke lenger markert som podkast'
-            .format(rows_updated)
-        )
+        self.message_user(request, '{} program(mer) er ikke lenger markert som podkast'
+                          .format(rows_updated))
+
     unmake_podcast.short_description = 'Fjern podkast-markering'
 
 

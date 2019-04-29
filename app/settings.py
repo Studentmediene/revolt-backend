@@ -296,3 +296,6 @@ if raven_dsn:
     }
 
 GRAPHENE = {'SCHEMA': 'api_graphql.schema.schema'}
+
+RR_API_BASE = config('RR_API_BASE', default='https://api.radiorevolt.no/v2')
+PODCAST_API_BASE = config('PODCAST_API_BASE', default='http://podkast.radiorevolt.no/api')
