@@ -85,6 +85,7 @@ class ShowType(graphene.ObjectType):
 
     slug = graphene.String()
     is_podcast = graphene.Boolean()
+    podcast_url = graphene.String()
     archived = graphene.Boolean()
 
     created_at = graphene.String()
@@ -114,6 +115,15 @@ class ShowType(graphene.ObjectType):
     @staticmethod
     def resolve_image(show, info):
         return show.image.url
+
+    @staticmethod
+    def resolve_podcast_url(show, info):
+        # Ensure we are consistent with ourselves -- podcast_url is always
+        # populated, but pretend it's not there when the show isn't a podcast.
+        if show.is_podcast:
+            return show.podcast_url
+        else:
+            return None
 
 
 class EpisodeType(graphene.ObjectType):

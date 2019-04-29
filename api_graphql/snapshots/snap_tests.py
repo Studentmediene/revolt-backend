@@ -103,6 +103,7 @@ snapshots['test_show_by_slug 1'] = {
             'isPodcast': False,
             'lead': 'Program2 beskrivelse',
             'name': 'Program2',
+            'podcastUrl': None,
             'posts': [
                 {
                     'id': 2
@@ -137,6 +138,7 @@ snapshots['test_all_shows 1'] = {
                 'isPodcast': True,
                 'lead': 'Program1 beskrivelse',
                 'name': 'Program1',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program1',
@@ -162,6 +164,7 @@ snapshots['test_all_shows 1'] = {
                 'isPodcast': False,
                 'lead': 'Program2 beskrivelse',
                 'name': 'Program2',
+                'podcastUrl': None,
                 'posts': [
                     {
                         'id': 2
@@ -187,6 +190,7 @@ snapshots['test_all_shows 1'] = {
                 'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program3',
@@ -209,6 +213,7 @@ snapshots['test_all_shows 1'] = {
                 'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program4',
@@ -416,6 +421,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'isPodcast': False,
                 'lead': 'Program2 beskrivelse',
                 'name': 'Program2',
+                'podcastUrl': None,
                 'posts': [
                     {
                         'id': 2
@@ -441,6 +447,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program3',
@@ -463,6 +470,7 @@ snapshots['test_all_shows_with_offset 1'] = {
                 'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program4',
@@ -492,6 +500,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 'isPodcast': False,
                 'lead': 'Program3 beskrivelse',
                 'name': 'Program3',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program3',
@@ -514,6 +523,7 @@ snapshots['test_all_shows_with_count 1'] = {
                 'isPodcast': True,
                 'lead': 'Program4 beskrivelse',
                 'name': 'Program4',
+                'podcastUrl': None,
                 'posts': [
                 ],
                 'slug': 'program4',
@@ -545,6 +555,7 @@ snapshots['test_show_by_id 1'] = {
             'isPodcast': True,
             'lead': 'Program1 beskrivelse',
             'name': 'Program1',
+            'podcastUrl': None,
             'posts': [
             ],
             'slug': 'program1',
