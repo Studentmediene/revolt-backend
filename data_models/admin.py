@@ -153,17 +153,20 @@ class ShowAdmin(admin.ModelAdmin):
     actions = ('make_podcast', 'unmake_podcast')
 
     def make_podcast(self, request, queryset):
-        rows_updated = queryset.update(is_podcast=True)
-        self.message_user(request, '{} program(mer) ble markert som podkast'.format(rows_updated))
+        return self._bulk_update_is_podcast(request, queryset, True, '{} program(mer) ble '
+                                            'markert som podkast')
 
     make_podcast.short_description = 'Marker som podkast'
 
     def unmake_podcast(self, request, queryset):
-        rows_updated = queryset.update(is_podcast=False)
-        self.message_user(request, '{} program(mer) er ikke lenger markert som podkast'
-                          .format(rows_updated))
+        return self._bulk_update_is_podcast(request, queryset, False, '{} program(mer) er ikke '
+                                            'lenger markert som podkast')
 
     unmake_podcast.short_description = 'Fjern podkast-markering'
+
+    def _bulk_update_is_podcast(self, request, queryset, is_podcast, message):
+        rows_updated = queryset.update(is_podcast=is_podcast)
+        self.message_user(request, message.format(rows_updated))
 
 
 @admin.register(Episode)
