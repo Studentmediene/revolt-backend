@@ -67,8 +67,7 @@ class Show(models.Model):
         verbose_name='Programmet er en podkast',
         default=False,
         help_text='Podkaster får lenke til podkast-feeden, og (etterhvert) mulighet til å legge '
-        'inn podkast-episoder.<br/>Flere program kan markeres som podkast samtidig i '
-        'programlista.',
+        'inn podkast-episoder.',
     )
     podcast_url = models.CharField(
         'Podkast-URL',
@@ -101,7 +100,7 @@ class Show(models.Model):
             try:
                 self.podcast_url = get_podcast_url_from_digas_id(self.digas_id)
             except Exception:
-                log.exception('Error occurred while trying to update podcast_url for {}. '
+                log.exception('Error occurred while trying to update podcast_url for show {}. '
                               'Not updating podcast_url this time.'.format(self.name))
         else:
             self.podcast_url = None
