@@ -1,3 +1,5 @@
+import logging
+
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from django import forms
 from django.contrib import admin
@@ -6,6 +8,8 @@ from sorl_cropping import ImageCroppingMixin
 
 from . import rr_api
 from .models import Category, Episode, HighlightedPost, Post, Settings, Show
+
+logger = logging.getLogger(__name__)
 
 
 class ShowFilter(admin.SimpleListFilter):
@@ -55,7 +59,11 @@ class SettingsAdminForm(forms.ModelForm):
 
 
 def get_show_options():
-    shows = rr_api.get_shows()
+    try:
+        shows = rr_api.get_shows()
+    except Exception:
+        logger.exception('Failed to fetch choices for Digas shows')
+        return []
 
     def process_shows(predicate):
         filtered_shows = filter(predicate, shows)
@@ -88,6 +96,33 @@ class ShowAdminForm(forms.ModelForm):
     class Meta:
         model = Show
         fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Ensure that the digas_id is not lost when the list of Digas shows is unavailable.
+        # Inspired by
+        # https://simpleisbetterthancomplex.com/tutorial/2018/01/29/how-to-implement-dependent-or-chained-dropdown-list-with-django.html
+
+        # What choices are available? Cast to list to evaluate the function
+        digas_shows = list(self.fields['digas_id'].choices)
+
+        if not digas_shows:
+            # Failed to fetch shows, fall back to option with current value
+            if 'digas_id' in self.data:
+                # From submitted form data
+                digas_id = self.data['digas_id']
+            elif self.instance.digas_id:
+                # From the Show model instance
+                digas_id = self.instance.digas_id
+            else:
+                # No Digas show selected
+                digas_id = None
+            # Create the fallback choices list
+            digas_shows = [(digas_id, 'Uforandret (fikk ikke hentet alternativer)')]
+
+        # Update the choices (this way, we also evaluate the choices function only once)
+        self.fields['digas_id'].choices = digas_shows
 
 
 class EpisodeAdminForm(forms.ModelForm):
