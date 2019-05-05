@@ -18,6 +18,8 @@ By default settings are configured for development and should just work, but som
 |REVOLT_MEDIA_ROOT|(BASE_DIR)/mediafiles|Files where uploaded media is located|
 |REVOLT_SECRET_KEY|replace_this_secret_key|[See Django SECRET_KEY](https://docs.djangoproject.com/en/2.0/ref/settings/#std:setting-SECRET_KEY). **It is important that this is changed in production.**
 |REVOLT_RAVEN_DSN|(Empty)|Sentry DSN using this format: https://user:pass@sentry.io/project|
+|RR_API_BASE|`https://api.radiorevolt.no/v2`|Location of the Radio REST API, used to look up available programs (shows) and other information from Digas, the radio archive system|
+|PODCAST_API_BASE|`http://podkast.radiorevolt.no/api`|Location of the podcast API, used to look up podcast URLs|
 
 
 ## Setup - Development

@@ -69,7 +69,7 @@ def get_show_options():
     return (
         (None, '--------'),
         ('Aktive programmer', active_shows),
-        ('Arkivert', old_shows),
+        ('Arkiverte programmer', old_shows),
     )
 
 
