@@ -1,12 +1,13 @@
 import pytest
+import requests
+from django.conf import settings
 from django.contrib import admin as django_admin
 from django.core.management import call_command
-from django.conf import settings
 from django.urls import reverse
-import requests
+
+from data_models import admin
 from data_models.models import Show
 from data_models.rr_api import get_podcast_url_from_digas_id
-from data_models import admin
 
 
 @pytest.fixture(scope='session')
@@ -58,11 +59,28 @@ def test_admin_highlightedposts(admin_client):
 
 
 mocked_show_list = [
-    {'old': 0, 'id': 123, 'name': 'Program1'},
-    {'old': 1, 'id': 234, 'name': 'Program2'},
-    {'old': 0, 'id': 345, 'name': 'Program3'},
-    {'old': 0, 'id': 456, 'name': 'Program4'},
+    {
+        'old': 0,
+        'id': 123,
+        'name': 'Program1'
+    },
+    {
+        'old': 1,
+        'id': 234,
+        'name': 'Program2'
+    },
+    {
+        'old': 0,
+        'id': 345,
+        'name': 'Program3'
+    },
+    {
+        'old': 0,
+        'id': 456,
+        'name': 'Program4'
+    },
 ]
+
 
 @pytest.mark.django_db
 def test_admin_show_details(admin_client, requests_mock):
@@ -108,11 +126,19 @@ def test_admin_post_details(admin_client):
 program1_podcast_url = 'http://podkast.radiorevolt.no/program1'
 old_podcast_url = 'http://example.com/outdated_url'
 
+
 @pytest.mark.django_db
 @pytest.mark.parametrize('digas_id,podcast_url,mocked_response', [
-    (123, program1_podcast_url, {'text': program1_podcast_url}),
-    (234, None, {'status_code': 404, 'reason': 'Not Found'}),
-    (234, old_podcast_url, {'exc': requests.HTTPError('This is a simulated error')}),
+    (123, program1_podcast_url, {
+        'text': program1_podcast_url
+    }),
+    (234, None, {
+        'status_code': 404,
+        'reason': 'Not Found'
+    }),
+    (234, old_podcast_url, {
+        'exc': requests.HTTPError('This is a simulated error')
+    }),
     (None, None, None),
 ])
 def test_populating_podcast_url(requests_mock, digas_id, podcast_url, mocked_response):
@@ -183,4 +209,3 @@ def test_is_podcast_actions(requests_mock, admin_client, action, is_podcast):
 
     assert response.status_code == 200
     assert Show.objects.filter(is_podcast=is_podcast).count() == num_shows
-
