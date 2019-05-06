@@ -38,3 +38,4 @@ isort==4.3.4
 
 # Usage of external Radio Revolt API
 requests==2.21.0
+requests-mock==1.6.0
