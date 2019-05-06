@@ -1,0 +1,8 @@
+[run]
+omit =
+  # Do not include tests, they're "free points"
+  api_graphql/snapshots/*
+  */tests.py
+  # Do not include migrations, since it is difficult to test them with test code
+  # (we expect developers test this manually)
+  data_models/migrations/*
