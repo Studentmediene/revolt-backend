@@ -42,7 +42,7 @@ def populate_digas_id(apps, schema_editor):
             digas_id = digas_id_by_on_demand_link[sod_url]
             if digas_id in used_digas_ids: 
                 # Alert the user and don't update this show.
-                log.exception('Duplicate digas_id encountered for {show}.' + \
+                log.error('Duplicate digas_id encountered for {show}.' + \
                     'digas_id not updated.'.format(
                         show=show.name,
                     )
@@ -56,7 +56,7 @@ def populate_digas_id(apps, schema_editor):
             break
         else:
             # We never found a satisfying episode, warn user about this
-            log.exception(
+            log.error(
                 'No suitable episode was found for show "{show}"'
                 .format(show=show.name)
             )
