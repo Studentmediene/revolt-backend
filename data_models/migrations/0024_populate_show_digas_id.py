@@ -38,7 +38,7 @@ def populate_digas_id(apps, schema_editor):
         else:
             # We never found a satisfying episode, warn user about this
             print(
-                'No suitable episode was found for "{show}"'
+                'No suitable episode was found for show "{show}"'
                 .format(show=show.name)
             )
 
