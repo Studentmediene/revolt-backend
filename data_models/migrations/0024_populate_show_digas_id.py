@@ -21,6 +21,7 @@ def populate_digas_id(apps, schema_editor):
         if show.digas_id:
             continue
 
+        not_updated = True
         max_tries = 15
         for i in range(max_tries):
             try:
@@ -40,14 +41,9 @@ def populate_digas_id(apps, schema_editor):
 
             # We found something!
             digas_id = digas_id_by_on_demand_link[sod_url]
-            if digas_id in used_digas_ids: 
-                # Alert the user and don't update this show.
-                log.error('Duplicate digas_id encountered for {show}.' + \
-                    'digas_id not updated.'.format(
-                        show=show.name,
-                    )
-                )
-                break
+            if digas_id in used_digas_ids:
+                # Keep checking next episode. Perhaps it has an unused ID
+                continue
 
             show.digas_id = digas_id
             show.save()
