@@ -524,6 +524,18 @@ CKEDITOR.dialog.add( 'image2', function( editor ) {
 						commit: function( widget ) {
 							widget.setData( 'hasCaption', this.getValue() );
 						}
+					},
+					{
+						id: 'credits',
+						type: 'text',
+						label: lang.credits,
+						setup: function( widget ) {
+							this.setValue( widget.data.credits );
+						},
+						commit: function( widget ) {
+							widget.setData( 'credits', this.getValue() );
+						},
+						validate: CKEDITOR.dialog.validate.notEmpty( lang.creditsMissing )
 					}
 				]
 			},

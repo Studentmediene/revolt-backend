@@ -11,14 +11,14 @@
 		templateBlock = new CKEDITOR.template(
 			'<figure class="{captionedClass}">' +
 				template +
-				'<figcaption>{captionPlaceholder}</figcaption>' +
+				'<figcaption>{credits}</figcaption>' +
 			'</figure>' ),
 		alignmentsObj = { left: 0, center: 1, right: 2 },
 		regexPercent = /^\s*(\d+\%)\s*$/i;
 
 	CKEDITOR.plugins.add( 'image2', {
 		// jscs:disable maximumLineLength
-		lang: 'en,no', // %REMOVE_LINE_CORE%
+		lang: 'nb,en', // %REMOVE_LINE_CORE%
 		// jscs:enable maximumLineLength
 		requires: 'widget,dialog',
 		icons: 'image',
@@ -342,6 +342,10 @@
 					alt: this.data.alt
 				} );
 
+				// Populate figcaption with required image credits
+				console.log(this.parts);
+				
+
 				// If shifting non-captioned -> captioned, remove classes
 				// related to styles from <img/>.
 				if ( this.oldData && !this.oldData.hasCaption && this.data.hasCaption ) {
@@ -369,7 +373,8 @@
 						height: image.getAttribute( 'height' ) || '',
 
 						// Lock ratio is on by default (https://dev.ckeditor.com/ticket/10833).
-						lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true
+						lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true,
+						credits: image.getAttribute( 'credits' ) || 'Foto: ',
 					};
 
 				// If we used 'a' in widget#parts definition, it could happen that
@@ -515,7 +520,7 @@
 				editable = editor.editable(),
 
 				// The order that stateActions get executed. It matters!
-				shiftables = [ 'hasCaption', 'align', 'link' ];
+				shiftables = [ 'hasCaption', 'align', 'link', 'credits' ];
 
 			// Atomic procedures, one per state variable.
 			var stateActions = {
@@ -556,6 +561,7 @@
 				},
 
 				hasCaption:	function( shift, oldValue, newValue ) {
+					console.log('hasCaption changed. Oldvalue: ' + oldValue + '. newValue: ' + newValue);
 					// This action is for real state change only.
 					if ( !shift.changed.hasCaption )
 						return;
@@ -576,7 +582,8 @@
 						// Create new <figure> from widget template.
 						var figure = CKEDITOR.dom.element.createFromHtml( templateBlock.output( {
 							captionedClass: captionedClass,
-							captionPlaceholder: editor.lang.image2.captionPlaceholder
+							captionPlaceholder: editor.lang.image2.captionPlaceholder,
+							credits: editor.lang.image2.creditsPlaceholder
 						} ), doc );
 
 						// Replace element with <figure>.
@@ -597,6 +604,15 @@
 
 						// Update widget's element.
 						shift.element = imageOrLink;
+					}
+				},
+
+				credits: function(shift, oldValue, newValue ) {
+					console.log('Credits changed. Oldvalue: ' + oldValue + '. newValue: ' + newValue);
+					console.log(shift.element.findOne('figcaption'))
+					var caption = shift.element.findOne('figcaption')
+					if(caption) {
+						caption.setText(newValue);
 					}
 				},
 

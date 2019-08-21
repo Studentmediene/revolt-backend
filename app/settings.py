@@ -136,6 +136,8 @@ CKEDITOR_UPLOAD_PATH = 'ckeditor'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 CKEDITOR_CONFIGS = {
     'default': {
+        'defaultLanguage': 'nb',
+        'image2_altRequired': True,
         'toolbar_Article': [
             {
                 'name': 'styles',
