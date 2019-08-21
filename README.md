@@ -35,8 +35,8 @@ virtualenv -p python3 venv
 ### Install requirements
 
 ```bash
+sudo apt-get install libpq-dev python3-dev zlib1g-dev libjpeg-dev 
 pip install -r requirements.txt
-sudo apt-get install libpq-dev python3-dev
 pip install psycopg2
 ```
 
