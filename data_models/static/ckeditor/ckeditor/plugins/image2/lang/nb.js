@@ -7,6 +7,8 @@ CKEDITOR.plugins.setLang( 'image2', 'nb', {
 	btnUpload: 'Send det til serveren',
 	captioned: 'Bilde med bildetekst',
 	captionPlaceholder: 'Bildetekst',
+	credits: 'Bildekreditering',
+	creditsPlaceholder: 'Foto: ',
 	infoTab: 'Bildeinformasjon',
 	lockRatio: 'Lås forhold',
 	menu: 'Bildeegenskaper',
@@ -17,5 +19,6 @@ CKEDITOR.plugins.setLang( 'image2', 'nb', {
 	title: 'Bildeegenskaper',
 	uploadTab: 'Last opp',
 	urlMissing: 'Bildets adresse mangler.',
-	altMissing: 'Alternativ tekst mangler.'
+	altMissing: 'Alternativ tekst mangler.',
+	creditsMissing: 'Bildekreditering mangler.'
 } );

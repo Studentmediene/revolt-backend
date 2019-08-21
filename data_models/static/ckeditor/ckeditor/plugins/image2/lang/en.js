@@ -7,6 +7,8 @@ CKEDITOR.plugins.setLang( 'image2', 'en', {
 	btnUpload: 'Send it to the Server',
 	captioned: 'Captioned image',
 	captionPlaceholder: 'Caption',
+	credits: 'Image credits',
+	creditsPlaceholder: 'Photo: ',
 	infoTab: 'Image Info',
 	lockRatio: 'Lock Ratio',
 	menu: 'Image Properties',
@@ -17,5 +19,6 @@ CKEDITOR.plugins.setLang( 'image2', 'en', {
 	title: 'Image Properties',
 	uploadTab: 'Upload',
 	urlMissing: 'Image source URL is missing.',
-	altMissing: 'Alternative text is missing.'
+	altMissing: 'Alternative text is missing.',
+	creditsMissing: 'Image credits are missing.'
 } );
