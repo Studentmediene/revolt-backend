@@ -30,6 +30,7 @@ class PostType(graphene.ObjectType):
     title = graphene.String()
     slug = graphene.String()
     image = graphene.String()
+    image_credits = graphene.String()
     cropped_images = graphene.Field(lambda: CroppedImagesType)
     lead = graphene.String()
     content = graphene.String()
