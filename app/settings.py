@@ -67,21 +67,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "app.urls"
 
-TEMPLATES = [
-    {
-        "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
-        "APP_DIRS": True,
-        "OPTIONS": {
-            "context_processors": [
-                "django.template.context_processors.debug",
-                "django.template.context_processors.request",
-                "django.contrib.auth.context_processors.auth",
-                "django.contrib.messages.context_processors.messages",
-            ]
-        },
-    }
-]
+TEMPLATES = [{
+    "BACKEND": "django.template.backends.django.DjangoTemplates",
+    "DIRS": [],
+    "APP_DIRS": True,
+    "OPTIONS": {
+        "context_processors": [
+            "django.template.context_processors.debug",
+            "django.template.context_processors.request",
+            "django.contrib.auth.context_processors.auth",
+            "django.contrib.messages.context_processors.messages",
+        ]
+    },
+}]
 
 WSGI_APPLICATION = "app.wsgi.application"
 
@@ -100,9 +98,15 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+    },
 ]
 
 # Internationalization
@@ -122,9 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = config(
-    "REVOLT_STATIC_ROOT", default=os.path.join(BASE_DIR, "staticfiles")
-)
+STATIC_ROOT = config("REVOLT_STATIC_ROOT", default=os.path.join(BASE_DIR, "staticfiles"))
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = config("REVOLT_MEDIA_ROOT", default=os.path.join(BASE_DIR, "mediafiles"))
@@ -133,9 +135,12 @@ CKEDITOR_UPLOAD_PATH = "ckeditor"
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_CONFIGS = {
     "default": {
-        "extraAllowedContent": "figure(*);figcaption;", 
-        "defaultLanguage": "nb",
-        "image2_altRequired": True,
+        "extraAllowedContent":
+        "figure(*);figcaption;",
+        "defaultLanguage":
+        "nb",
+        "image2_altRequired":
+        True,
         "toolbar_Article": [
             {
                 "name": "styles",
@@ -160,7 +165,8 @@ CKEDITOR_CONFIGS = {
                 ],
             },
             {
-                "name": "basicstyles",
+                "name":
+                "basicstyles",
                 "items": [
                     "Bold",
                     "Italic",
@@ -173,7 +179,10 @@ CKEDITOR_CONFIGS = {
                     "RemoveFormat",
                 ],
             },
-            {"name": "colors", "items": ["TextColor", "BGColor"]},
+            {
+                "name": "colors",
+                "items": ["TextColor", "BGColor"]
+            },
             {
                 "name": "clipboard",
                 "items": ["Cut", "Copy", "SelectAll", "-", "Undo", "Redo"],
@@ -183,9 +192,13 @@ CKEDITOR_CONFIGS = {
                 "name": "paragraph",
                 "items": ["NumberedList", "BulletedList", "-", "Outdent", "Indent"],
             },
-            {"name": "links", "items": ["Link", "Unlink", "Anchor"]},
             {
-                "name": "insert",
+                "name": "links",
+                "items": ["Link", "Unlink", "Anchor"]
+            },
+            {
+                "name":
+                "insert",
                 "items": [
                     "Image",
                     "Table",
@@ -197,32 +210,40 @@ CKEDITOR_CONFIGS = {
                 ],
             },
         ],
-        "toolbar": "Article",
-        "height": 800,
-        "width": 1000,
-        "forcePasteAsPlainText": True,
-        "font_names": "Arial/Arial, Helvetica, sans-serif",
-        "font_defaultLabel": "Arial",
-        "youtube_responsive": True,
+        "toolbar":
+        "Article",
+        "height":
+        800,
+        "width":
+        1000,
+        "forcePasteAsPlainText":
+        True,
+        "font_names":
+        "Arial/Arial, Helvetica, sans-serif",
+        "font_defaultLabel":
+        "Arial",
+        "youtube_responsive":
+        True,
         "youtube_disabled_fields": ["txtWidth", "txtHeight", "txtEmbed"],
-        "tabSpaces": 4,
-        "contentsCss": "/static/ckeditor/editor.css",
-        "extraPlugins": ",".join(
-            [
-                # your extra plugins here
-                "uploadimage",
-                "autolink",
-                "image2",
-                "youtube",
-                # 'devtools',
-                "widget",
-                "lineutils",
-                "clipboard",
-                "dialog",
-                "dialogui",
-                "elementspath",
-            ]
-        ),
+        "tabSpaces":
+        4,
+        "contentsCss":
+        "/static/ckeditor/editor.css",
+        "extraPlugins":
+        ",".join([
+            # your extra plugins here
+            "uploadimage",
+            "autolink",
+            "image2",
+            "youtube",
+            # 'devtools',
+            "widget",
+            "lineutils",
+            "clipboard",
+            "dialog",
+            "dialogui",
+            "elementspath",
+        ]),
     },
     "small": {
         "toolbar_Article": [
@@ -249,7 +270,8 @@ CKEDITOR_CONFIGS = {
                 ],
             },
             {
-                "name": "basicstyles",
+                "name":
+                "basicstyles",
                 "items": [
                     "Bold",
                     "Italic",
@@ -262,7 +284,10 @@ CKEDITOR_CONFIGS = {
                     "RemoveFormat",
                 ],
             },
-            {"name": "colors", "items": ["TextColor", "BGColor"]},
+            {
+                "name": "colors",
+                "items": ["TextColor", "BGColor"]
+            },
             {
                 "name": "clipboard",
                 "items": ["Cut", "Copy", "SelectAll", "-", "Undo", "Redo"],
@@ -272,29 +297,39 @@ CKEDITOR_CONFIGS = {
                 "name": "paragraph",
                 "items": ["NumberedList", "BulletedList", "-", "Outdent", "Indent"],
             },
-            {"name": "links", "items": ["Link", "Unlink", "Anchor"]},
+            {
+                "name": "links",
+                "items": ["Link", "Unlink", "Anchor"]
+            },
         ],
-        "toolbar": "Article",
-        "height": 300,
-        "width": 600,
-        "forcePasteAsPlainText": True,
-        "font_names": "Arial/Arial, Helvetica, sans-serif",
-        "font_defaultLabel": "Arial",
-        "tabSpaces": 4,
-        "contentsCss": "/static/ckeditor/editor.css",
-        "extraPlugins": ",".join(
-            [
-                # your extra plugins here
-                "autolink",
-                # 'devtools',
-                "widget",
-                "lineutils",
-                "clipboard",
-                "dialog",
-                "dialogui",
-                "elementspath",
-            ]
-        ),
+        "toolbar":
+        "Article",
+        "height":
+        300,
+        "width":
+        600,
+        "forcePasteAsPlainText":
+        True,
+        "font_names":
+        "Arial/Arial, Helvetica, sans-serif",
+        "font_defaultLabel":
+        "Arial",
+        "tabSpaces":
+        4,
+        "contentsCss":
+        "/static/ckeditor/editor.css",
+        "extraPlugins":
+        ",".join([
+            # your extra plugins here
+            "autolink",
+            # 'devtools',
+            "widget",
+            "lineutils",
+            "clipboard",
+            "dialog",
+            "dialogui",
+            "elementspath",
+        ]),
     },
 }
 
@@ -311,7 +346,4 @@ if raven_dsn:
 GRAPHENE = {"SCHEMA": "api_graphql.schema.schema"}
 
 RR_API_BASE = config("RR_API_BASE", default="https://api.radiorevolt.no/v2")
-PODCAST_API_BASE = config(
-    "PODCAST_API_BASE", default="http://podkast.radiorevolt.no/api"
-)
-
+PODCAST_API_BASE = config("PODCAST_API_BASE", default="http://podkast.radiorevolt.no/api")

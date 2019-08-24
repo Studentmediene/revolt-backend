@@ -170,8 +170,7 @@ class Post(models.Model):
         max_length=250,
         default="",
         help_text='Vennligst oppgi kredittering for forsidebildet. ' +
-        'Kreditteringen burde ha formatet "Foto: <navn>"'
-    )
+        'Kreditteringen burde ha formatet "Foto: <navn>"')
     lead = models.CharField('Ingress', max_length=140)
     content = models.TextField('Brødtekst')
     deleted = models.BooleanField('Slettet', default=False)
