@@ -514,18 +514,6 @@ CKEDITOR.dialog.add( 'image2', function( editor ) {
 						]
 					},
 					{
-						id: 'hasCaption',
-						type: 'checkbox',
-						label: lang.captioned,
-						requiredContent: features.caption.requiredContent,
-						setup: function( widget ) {
-							this.setValue( widget.data.hasCaption );
-						},
-						commit: function( widget ) {
-							widget.setData( 'hasCaption', this.getValue() );
-						}
-					},
-					{
 						id: 'credits',
 						type: 'text',
 						label: lang.credits,

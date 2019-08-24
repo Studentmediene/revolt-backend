@@ -7,10 +7,13 @@
 
 ( function() {
 
-	var template = '<img alt="" src="" />',
-		templateBlock = new CKEDITOR.template(
+	var template = '<figure>' +
+						'<img alt="" src="" />' +
+						'<figcaption></figcaption>' +
+					'</figure>',
+	templateBlock = new CKEDITOR.template(
 			'<figure class="{captionedClass}">' +
-				template +
+				'<img alt="" src="" />' +
 				'<figcaption>{credits}</figcaption>' +
 			'</figure>' ),
 		alignmentsObj = { left: 0, center: 1, right: 2 },
@@ -340,11 +343,7 @@
 					'data-cke-saved-src': this.data.src,
 
 					alt: this.data.alt
-				} );
-
-				// Populate figcaption with required image credits
-				console.log(this.parts);
-				
+				} );			
 
 				// If shifting non-captioned -> captioned, remove classes
 				// related to styles from <img/>.
@@ -366,7 +365,7 @@
 				var helpers = CKEDITOR.plugins.image2,
 					image = this.parts.image,
 					data = {
-						hasCaption: !!this.parts.caption,
+						hasCaption: true,
 						src: image.getAttribute( 'src' ),
 						alt: image.getAttribute( 'alt' ) || '',
 						width: image.getAttribute( 'width' ) || '',
@@ -390,7 +389,7 @@
 				// Note: Center alignment is detected during upcast, so only left/right cases
 				// are checked below.
 				if ( !data.align ) {
-					var alignElement = data.hasCaption ? this.element : image;
+					var alignElement = this.element;
 
 					// Read the initial left/right alignment from the class set on element.
 					if ( alignClasses ) {
@@ -561,7 +560,6 @@
 				},
 
 				hasCaption:	function( shift, oldValue, newValue ) {
-					console.log('hasCaption changed. Oldvalue: ' + oldValue + '. newValue: ' + newValue);
 					// This action is for real state change only.
 					if ( !shift.changed.hasCaption )
 						return;
@@ -608,8 +606,6 @@
 				},
 
 				credits: function(shift, oldValue, newValue ) {
-					console.log('Credits changed. Oldvalue: ' + oldValue + '. newValue: ' + newValue);
-					console.log(shift.element.findOne('figcaption'))
 					var caption = shift.element.findOne('figcaption')
 					if(caption) {
 						caption.setText(newValue);
@@ -857,7 +853,7 @@
 	function setWrapperAlign( widget, alignClasses ) {
 		var wrapper = widget.wrapper,
 			align = widget.data.align,
-			hasCaption = widget.data.hasCaption;
+			hasCaption = true
 
 		if ( alignClasses ) {
 			// Remove all align classes first.
@@ -881,11 +877,7 @@
 			}
 		} else {
 			if ( align == 'center' ) {
-				if ( hasCaption )
-					wrapper.setStyle( 'text-align', 'center' );
-				else
-					wrapper.removeStyle( 'text-align' );
-
+				wrapper.setStyle( 'text-align', 'center' );
 				wrapper.removeStyle( 'float' );
 			}
 			else {
@@ -1613,7 +1605,7 @@
 	// @param {CKEDITOR.plugins.widget} widget
 	// @returns {CKEDITOR.dom.element}
 	function getStyleableElement( widget ) {
-		return widget.data.hasCaption ? widget.element : widget.parts.image;
+		return widget.element;
 	}
 } )();
 
