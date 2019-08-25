@@ -174,8 +174,16 @@ CKEDITOR_CONFIGS = {
             {
                 'name':
                 'insert',
-                'items':
-                ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe', 'Youtube', 'Spotify']
+                'items': [
+                    'Image',
+                    'Table',
+                    'HorizontalRule',
+                    'Smiley',
+                    'SpecialChar',
+                    'Iframe',
+                    'Youtube',
+                    'Spotify',
+                ]
             },
         ],
         'toolbar':

@@ -37,9 +37,7 @@ class ArchivedShowFilter(ShowFilter):
 
 
 class PostAdminForm(forms.ModelForm):
-    content = forms.CharField(
-        widget=CKEditorUploadingWidget(),
-        label='Brødtekst')
+    content = forms.CharField(widget=CKEditorUploadingWidget(), label='Brødtekst')
 
     class Meta:
         model = Post
