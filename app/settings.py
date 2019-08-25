@@ -175,7 +175,7 @@ CKEDITOR_CONFIGS = {
                 'name':
                 'insert',
                 'items':
-                ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe', 'Youtube']
+                ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Iframe', 'Youtube', 'Spotify']
             },
         ],
         'toolbar':
@@ -208,6 +208,7 @@ CKEDITOR_CONFIGS = {
             'autolink',
             'image2',
             'youtube',
+            'spotify',
             # 'devtools',
             'widget',
             'lineutils',
