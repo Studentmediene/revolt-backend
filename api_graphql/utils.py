@@ -1,5 +1,3 @@
-from datetime import timedelta
-
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.utils import timezone
 
