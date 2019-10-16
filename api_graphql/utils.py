@@ -42,8 +42,4 @@ def get_public_posts(posts):
 def get_public_episodes(episodes):
     return episodes \
         .order_by('-publish_at') \
-        .filter(publish_at__lte=timezone.now()) \
-        .filter(publish_at__gte=timezone.now() - timedelta(days=730))
-    # Hide all episodes that are older than 2 years, because of license rights through TONO.
-    # We are not allowed to make old episodes with music available. In the future we are hopefully
-    # allowed to serve old episodes with music.
+        .filter(publish_at__lte=timezone.now())
