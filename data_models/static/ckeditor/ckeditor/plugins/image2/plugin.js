@@ -373,7 +373,7 @@
 
 						// Lock ratio is on by default (https://dev.ckeditor.com/ticket/10833).
 						lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true,
-						credits: image.getAttribute( 'credits' ) || 'Foto: ',
+						credits: image.getAttribute( 'credits' ) || '',
 					};
 
 				// If we used 'a' in widget#parts definition, it could happen that

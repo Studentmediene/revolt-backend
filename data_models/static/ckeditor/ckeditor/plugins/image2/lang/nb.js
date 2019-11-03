@@ -8,7 +8,7 @@ CKEDITOR.plugins.setLang( 'image2', 'nb', {
 	captioned: 'Bilde med bildetekst',
 	captionPlaceholder: 'Bildetekst',
 	credits: 'Bildekreditering',
-	creditsPlaceholder: 'Foto: ',
+	creditsPlaceholder: '',
 	infoTab: 'Bildeinformasjon',
 	lockRatio: 'Lås forhold',
 	menu: 'Bildeegenskaper',

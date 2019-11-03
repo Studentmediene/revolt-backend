@@ -8,7 +8,7 @@ CKEDITOR.plugins.setLang( 'image2', 'en', {
 	captioned: 'Captioned image',
 	captionPlaceholder: 'Caption',
 	credits: 'Image credits',
-	creditsPlaceholder: 'Photo: ',
+	creditsPlaceholder: '',
 	infoTab: 'Image Info',
 	lockRatio: 'Lock Ratio',
 	menu: 'Image Properties',
