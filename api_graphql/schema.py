@@ -154,7 +154,7 @@ class EpisodeType(graphene.ObjectType):
         if episode.use_title:
             return episode.title
         else:
-            return '{} {}'.format(episode.show.name, episode.created_at.strftime('%d.%m.%Y'))
+            return '{} {}'.format(episode.show.name, episode.publish_at.strftime('%d.%m.%Y'))
 
     @staticmethod
     def resolve_created_by(episode, info):

@@ -197,17 +197,18 @@ CKEDITOR_CONFIGS = {
                 "items": ["Link", "Unlink", "Anchor"]
             },
             {
-                "name":
-                "insert",
-                "items": [
-                    "Image",
-                    "Table",
-                    "HorizontalRule",
-                    "Smiley",
-                    "SpecialChar",
-                    "Iframe",
-                    "Youtube",
-                ],
+                'name':
+                'insert',
+                'items': [
+                    'Image',
+                    'Table',
+                    'HorizontalRule',
+                    'Smiley',
+                    'SpecialChar',
+                    'Iframe',
+                    'Youtube',
+                    'Spotify',
+                ]
             },
         ],
         "toolbar":
@@ -232,10 +233,11 @@ CKEDITOR_CONFIGS = {
         "extraPlugins":
         ",".join([
             # your extra plugins here
-            "uploadimage",
-            "autolink",
-            "image2",
-            "youtube",
+            'uploadimage',
+            'autolink',
+            'image2',
+            'youtube',
+            'spotify',
             # 'devtools',
             "widget",
             "lineutils",
