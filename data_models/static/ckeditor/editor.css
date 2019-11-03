@@ -24,17 +24,17 @@ img {
 * START Spotify CKEditor Plugin
 */
 
-.spotify-playlist-wrapper.align-right {
+:global(.spotify-playlist-wrapper.align-right) {
   float: right;
 }
-.spotify-playlist-wrapper.align-left {
+:global(.spotify-playlist-wrapper.align-left) {
   float: left;
 }
-.spotify-playlist-wrapper.align-center {
+:global(.spotify-playlist-wrapper.align-center) {
   margin-left: auto;
   margin-right: auto;
 }
-.spotify-playlist-wrapper > iframe.no-border {
+:global(.spotify-playlist-wrapper > iframe.no-border) {
   border: none;
 }
 
