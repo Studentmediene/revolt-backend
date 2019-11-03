@@ -166,6 +166,7 @@ post_query = '''query {
             small
             thumbnail
         }
+        imageCredits
         lead
         content
         categories {
