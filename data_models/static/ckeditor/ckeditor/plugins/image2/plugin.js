@@ -7,18 +7,21 @@
 
 ( function() {
 
-	var template = '<img alt="" src="" />',
-		templateBlock = new CKEDITOR.template(
+	var template = '<figure>' +
+						'<img alt="" src="" />' +
+						'<figcaption></figcaption>' +
+					'</figure>',
+	templateBlock = new CKEDITOR.template(
 			'<figure class="{captionedClass}">' +
-				template +
-				'<figcaption>{captionPlaceholder}</figcaption>' +
+				'<img alt="" src="" />' +
+				'<figcaption>{credits}</figcaption>' +
 			'</figure>' ),
 		alignmentsObj = { left: 0, center: 1, right: 2 },
 		regexPercent = /^\s*(\d+\%)\s*$/i;
 
 	CKEDITOR.plugins.add( 'image2', {
 		// jscs:disable maximumLineLength
-		lang: 'af,ar,az,bg,bn,bs,ca,cs,cy,da,de,de-ch,el,en,en-au,en-ca,en-gb,eo,es,es-mx,et,eu,fa,fi,fo,fr,fr-ca,gl,gu,he,hi,hr,hu,id,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,oc,pl,pt,pt-br,ro,ru,si,sk,sl,sq,sr,sr-latn,sv,th,tr,tt,ug,uk,vi,zh,zh-cn', // %REMOVE_LINE_CORE%
+		lang: 'nb,en', // %REMOVE_LINE_CORE%
 		// jscs:enable maximumLineLength
 		requires: 'widget,dialog',
 		icons: 'image',
@@ -340,7 +343,7 @@
 					'data-cke-saved-src': this.data.src,
 
 					alt: this.data.alt
-				} );
+				} );			
 
 				// If shifting non-captioned -> captioned, remove classes
 				// related to styles from <img/>.
@@ -362,14 +365,15 @@
 				var helpers = CKEDITOR.plugins.image2,
 					image = this.parts.image,
 					data = {
-						hasCaption: !!this.parts.caption,
+						hasCaption: true,
 						src: image.getAttribute( 'src' ),
 						alt: image.getAttribute( 'alt' ) || '',
 						width: image.getAttribute( 'width' ) || '',
 						height: image.getAttribute( 'height' ) || '',
 
 						// Lock ratio is on by default (https://dev.ckeditor.com/ticket/10833).
-						lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true
+						lock: this.ready ? helpers.checkHasNaturalRatio( image ) : true,
+						credits: image.getAttribute( 'credits' ) || '',
 					};
 
 				// If we used 'a' in widget#parts definition, it could happen that
@@ -385,7 +389,7 @@
 				// Note: Center alignment is detected during upcast, so only left/right cases
 				// are checked below.
 				if ( !data.align ) {
-					var alignElement = data.hasCaption ? this.element : image;
+					var alignElement = this.element;
 
 					// Read the initial left/right alignment from the class set on element.
 					if ( alignClasses ) {
@@ -515,7 +519,7 @@
 				editable = editor.editable(),
 
 				// The order that stateActions get executed. It matters!
-				shiftables = [ 'hasCaption', 'align', 'link' ];
+				shiftables = [ 'hasCaption', 'align', 'link', 'credits' ];
 
 			// Atomic procedures, one per state variable.
 			var stateActions = {
@@ -576,7 +580,8 @@
 						// Create new <figure> from widget template.
 						var figure = CKEDITOR.dom.element.createFromHtml( templateBlock.output( {
 							captionedClass: captionedClass,
-							captionPlaceholder: editor.lang.image2.captionPlaceholder
+							captionPlaceholder: editor.lang.image2.captionPlaceholder,
+							credits: editor.lang.image2.creditsPlaceholder
 						} ), doc );
 
 						// Replace element with <figure>.
@@ -597,6 +602,13 @@
 
 						// Update widget's element.
 						shift.element = imageOrLink;
+					}
+				},
+
+				credits: function(shift, oldValue, newValue ) {
+					var caption = shift.element.findOne('figcaption')
+					if(caption) {
+						caption.setText(newValue);
 					}
 				},
 
@@ -841,7 +853,7 @@
 	function setWrapperAlign( widget, alignClasses ) {
 		var wrapper = widget.wrapper,
 			align = widget.data.align,
-			hasCaption = widget.data.hasCaption;
+			hasCaption = true
 
 		if ( alignClasses ) {
 			// Remove all align classes first.
@@ -865,11 +877,7 @@
 			}
 		} else {
 			if ( align == 'center' ) {
-				if ( hasCaption )
-					wrapper.setStyle( 'text-align', 'center' );
-				else
-					wrapper.removeStyle( 'text-align' );
-
+				wrapper.setStyle( 'text-align', 'center' );
 				wrapper.removeStyle( 'float' );
 			}
 			else {
@@ -1597,7 +1605,7 @@
 	// @param {CKEDITOR.plugins.widget} widget
 	// @returns {CKEDITOR.dom.element}
 	function getStyleableElement( widget ) {
-		return widget.data.hasCaption ? widget.element : widget.parts.image;
+		return widget.element;
 	}
 } )();
 

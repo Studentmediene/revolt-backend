@@ -164,6 +164,13 @@ class Post(models.Model):
         size_warning=True,
         verbose_name='Bildeutsnitt',
         help_text='Velg bildeutsnitt')
+    image_credits = models.CharField(
+        'Bildekredittering',
+        blank=False,
+        max_length=250,
+        default="",
+        help_text='Vennligst oppgi kredittering for forsidebildet. ' +
+        'Kreditteringen burde ha formatet "Foto: <navn>"')
     lead = models.CharField('Ingress', max_length=140)
     content = models.TextField('Brødtekst')
     deleted = models.BooleanField('Slettet', default=False)
