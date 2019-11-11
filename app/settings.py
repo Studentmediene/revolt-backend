@@ -183,7 +183,7 @@ CKEDITOR_CONFIGS = {
         'height':
         800,
         'width':
-        1000,
+        700,
         'forcePasteAsPlainText':
         True,
         'font_names':
@@ -214,7 +214,7 @@ CKEDITOR_CONFIGS = {
             'clipboard',
             'dialog',
             'dialogui',
-            'elementspath'
+            'elementspath',
         ]),
     },
     'small': {
