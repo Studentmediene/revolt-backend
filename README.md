@@ -43,3 +43,12 @@ yapf -pir api_graphql app data_models -e '**/migrations' -e '**/snapshots'
 isort -rc api_graphql app data_models
 pytest
 ```
+
+## Git conventions
+Can be found [here](https://confluence.smint.no/display/IT/Git+conventions).
+
+## Deployment
+Is described [here](https://confluence.smint.no/display/IT/Deployment).
+
+## kapina-frontend
+Can be found [here](https://github.com/Studentmediene/kapina-frontend)
