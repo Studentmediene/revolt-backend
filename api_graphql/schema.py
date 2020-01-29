@@ -30,6 +30,7 @@ class PostType(graphene.ObjectType):
     title = graphene.String()
     slug = graphene.String()
     image = graphene.String()
+    image_credits = graphene.String()
     cropped_images = graphene.Field(lambda: CroppedImagesType)
     lead = graphene.String()
     content = graphene.String()
@@ -153,7 +154,7 @@ class EpisodeType(graphene.ObjectType):
         if episode.use_title:
             return episode.title
         else:
-            return '{} {}'.format(episode.show.name, episode.created_at.strftime('%d.%m.%Y'))
+            return '{} {}'.format(episode.show.name, episode.publish_at.strftime('%d.%m.%Y'))
 
     @staticmethod
     def resolve_created_by(episode, info):

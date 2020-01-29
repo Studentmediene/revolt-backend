@@ -1,9 +1,9 @@
 import logging
-from datetime import datetime
 
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django_extensions.db.fields import AutoSlugField
 from solo.models import SingletonModel
 from sorl_cropping import ImageRatioField
@@ -131,7 +131,7 @@ class Episode(models.Model):
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
 
-    publish_at = models.DateTimeField(default=datetime.now)
+    publish_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     created_by = models.ForeignKey(
         User, on_delete=models.PROTECT, null=True, verbose_name='Opprettet av')
@@ -164,6 +164,13 @@ class Post(models.Model):
         size_warning=True,
         verbose_name='Bildeutsnitt',
         help_text='Velg bildeutsnitt')
+    image_credits = models.CharField(
+        'Bildekredittering',
+        blank=False,
+        max_length=250,
+        default="",
+        help_text='Vennligst oppgi kredittering for forsidebildet. ' +
+        'Kreditteringen burde ha formatet "Foto: <navn>"')
     lead = models.CharField('Ingress', max_length=140)
     content = models.TextField('Brødtekst')
     deleted = models.BooleanField('Slettet', default=False)
@@ -185,7 +192,7 @@ class Post(models.Model):
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
 
-    publish_at = models.DateTimeField('Publisert', default=datetime.now)
+    publish_at = models.DateTimeField('Publisert', default=timezone.now)
 
     ready_to_be_published = models.BooleanField(
         'Klar til publisering',

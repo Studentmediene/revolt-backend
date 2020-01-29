@@ -514,16 +514,16 @@ CKEDITOR.dialog.add( 'image2', function( editor ) {
 						]
 					},
 					{
-						id: 'hasCaption',
-						type: 'checkbox',
-						label: lang.captioned,
-						requiredContent: features.caption.requiredContent,
+						id: 'credits',
+						type: 'text',
+						label: lang.credits,
 						setup: function( widget ) {
-							this.setValue( widget.data.hasCaption );
+							this.setValue( widget.data.credits );
 						},
 						commit: function( widget ) {
-							widget.setData( 'hasCaption', this.getValue() );
-						}
+							widget.setData( 'credits', this.getValue() );
+						},
+						validate: CKEDITOR.dialog.validate.notEmpty( lang.creditsMissing )
 					}
 				]
 			},
