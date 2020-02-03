@@ -216,7 +216,7 @@ CKEDITOR_CONFIGS = {
         "height":
         800,
         "width":
-        700,
+        800,
         "forcePasteAsPlainText":
         True,
         "font_names":
