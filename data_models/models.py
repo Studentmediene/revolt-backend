@@ -36,6 +36,8 @@ class Settings(SingletonModel):
     chief_editor = models.CharField('Ansvarlig redaktør', default="", max_length=128)
     radio_editor = models.CharField('Radioredaktør', default="", max_length=128)
     music_producer = models.CharField('Musikkprodusent', default="", max_length=128)
+    cultural_producer = models.CharField('Kulturprodusent', default="", max_length=128)
+    entertainment_producer = models.CharField('Underholdningsprodusent', default="", max_length=128)
 
     about = models.TextField('Om Radio Revolt')
 
