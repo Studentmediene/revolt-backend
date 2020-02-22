@@ -62,6 +62,7 @@ class Show(models.Model):
     content = models.TextField('Lang beskrivelse')
 
     categories = models.ManyToManyField(Category, blank=True, verbose_name='Kategorier')
+    category = models.ForeignKey(Category, models.SET_NULL, null=True, blank=True, verbose_name='Kategori', related_name='enkelt_kategori')
 
     digas_id = models.IntegerField(verbose_name='Tilhørende Digas-program', unique=True, null=True)
 
