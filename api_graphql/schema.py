@@ -21,6 +21,8 @@ class SettingsType(graphene.ObjectType):
     chief_editor = graphene.String()
     radio_editor = graphene.String()
     music_producer = graphene.String()
+    cultural_producer = graphene.String()
+    entertainment_producer = graphene.String()
     privacy_policy = graphene.String()
 
 
