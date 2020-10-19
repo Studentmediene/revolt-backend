@@ -5,7 +5,7 @@ from django.contrib import admin
 from graphene_django.views import GraphQLView
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url('', admin.site.urls),
     url(r'^graphql', GraphQLView.as_view(graphiql=True)),
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ] + static(

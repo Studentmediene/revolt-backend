@@ -18,42 +18,42 @@ def django_db_setup(django_db_setup, django_db_blocker):
 
 @pytest.mark.django_db
 def test_admin_index(admin_client):
-    response = admin_client.get('/admin/')
+    response = admin_client.get('/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_post(admin_client):
-    response = admin_client.get('/admin/data_models/post/')
+    response = admin_client.get('/data_models/post/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_show(admin_client):
-    response = admin_client.get('/admin/data_models/show/')
+    response = admin_client.get('/data_models/show/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_episode(admin_client):
-    response = admin_client.get('/admin/data_models/episode/')
+    response = admin_client.get('/data_models/episode/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_settings(admin_client):
-    response = admin_client.get('/admin/data_models/settings/')
+    response = admin_client.get('/data_models/settings/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_highlightedposts(admin_client):
-    response = admin_client.get('/admin/data_models/highlightedpost/')
+    response = admin_client.get('/data_models/highlightedpost/')
 
     assert response.status_code == 200
 
@@ -85,7 +85,7 @@ mocked_show_list = [
 @pytest.mark.django_db
 def test_admin_show_details(admin_client, requests_mock):
     requests_mock.get('{}/programmer/list'.format(settings.RR_API_BASE), json=mocked_show_list)
-    response = admin_client.get('/admin/data_models/show/1/change/')
+    response = admin_client.get('/data_models/show/1/change/')
 
     assert response.status_code == 200
 
@@ -96,7 +96,7 @@ def test_admin_show_details_on_error(admin_client, requests_mock):
         '{}/programmer/list'.format(settings.RR_API_BASE),
         exc=requests.HTTPError('A simulated error occurred, but it should not hinder page render.'),
     )
-    response = admin_client.get('/admin/data_models/show/1/change/')
+    response = admin_client.get('/data_models/show/1/change/')
 
     assert response.status_code == 200
 
@@ -111,14 +111,14 @@ def test_admin_show_details_on_error(admin_client, requests_mock):
 
 @pytest.mark.django_db
 def test_admin_episode_details(admin_client):
-    response = admin_client.get('/admin/data_models/episode/1/change/')
+    response = admin_client.get('/data_models/episode/1/change/')
 
     assert response.status_code == 200
 
 
 @pytest.mark.django_db
 def test_admin_post_details(admin_client):
-    response = admin_client.get('/admin/data_models/post/1/change/')
+    response = admin_client.get('/data_models/post/1/change/')
 
     assert response.status_code == 200
 

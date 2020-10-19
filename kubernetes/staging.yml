@@ -1,0 +1,109 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${CI_PROJECT_NAME}-staging
+  namespace: ${KUBE_NAMESPACE}
+  labels:
+    app: ${CI_PROJECT_NAME}-staging
+spec:
+  selector:
+    matchLabels:
+      app: ${CI_PROJECT_NAME}-staging
+  replicas: 1
+  revisionHistoryLimit: 2
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 10%
+  template:
+    metadata:
+      labels:
+        app: ${CI_PROJECT_NAME}-staging
+    spec:
+      securityContext:
+        # This overrides any user defined in the Dockerfile
+        runAsUser: 13000
+        runAsGroup: 8000
+        fsGroup: 2000
+      containers:
+        - image: ${CI_CONTAINER_NAME}
+          name: staging
+          ports:
+            - containerPort: 8000
+              name: staging
+          env:
+            - name: REVOLT_DEBUG
+              value: false
+            - name: REVOLT_ALLOWED_HOSTS
+              value: "staging.radiorevolt.no"
+            - name: REVOLT_STATIC_ROOT
+              value: "/var/www/static/"
+            - name: REVOLT_MEDIA_ROOT
+              value: "/var/www/media/"
+            - name: REVOLT_SECRET_KEY
+              value: ${CI_SECRET}
+              # Metadata for information specific endpoints. such as to Sentry
+              # This was stored in a secret, just because it was the easiest
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          # Tells it whether or not the application should be restarted or not. ex. from deadlock
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            failureThreshold: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+          resources:
+            limits:
+              cpu: '400m'
+              memory: '500Mi'
+            requests:
+              cpu: '10m'
+              memory: '300Mi'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ${CI_PROJECT_NAME}-staging
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  selector:
+    app: ${CI_PROJECT_NAME}-staging
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ${CI_PROJECT_NAME}-ingress-staging
+  namespace: ${KUBE_NAMESPACE}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    # Enable CORS so client can handle HTTP 503 from ingress controller
+    # https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#enable-cors
+#    nginx.ingress.kubernetes.io/enable-modsecurity: true
+#    nginx.ingress.kubernetes.io/enable-owasp-core-rules: true
+spec:
+  tls:
+    - hosts:
+        - staging.kapina.radiorevolt.no
+      secretName: tls-staging-secret
+  rules:
+    - host: staging.kapina.radiorevolt.no
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: ${CI_PROJECT_NAME}-staging
+              servicePort: 8000

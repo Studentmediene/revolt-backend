@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -130,6 +131,8 @@ STATIC_ROOT = config("REVOLT_STATIC_ROOT", default=os.path.join(BASE_DIR, "stati
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = config("REVOLT_MEDIA_ROOT", default=os.path.join(BASE_DIR, "mediafiles"))
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CKEDITOR_UPLOAD_PATH = "ckeditor"
 CKEDITOR_IMAGE_BACKEND = "pillow"

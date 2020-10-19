@@ -1,0 +1,33 @@
+image: docker:latest
+services:
+  - docker:dind
+
+include:
+  - project: 'infrastructure/gitlab-ci-helper'
+    file: '/gitlab-ci-helper.yml'
+
+stages:
+  - package
+  - staging
+
+Build Docker:
+  only: 
+    - docker
+  extends: .docker-build
+  stage: package
+
+Deploy staging:
+  only: 
+    - docker
+  environment:
+    name: Staging
+    url: https://kapina-staging.smint.no/
+  extends: .staging
+  stage: staging
+
+
+
+
+
+
+
