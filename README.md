@@ -1,3 +1,6 @@
+# Project moved
+This repository and further development has been moved to [gitlab.smint.no](https://gitlab.smint.no/kapina/kapina-backend)
+
 # kapina-backend
 [![Build Status](https://travis-ci.org/Studentmediene/kapina-backend.svg?branch=dev)](https://travis-ci.org/Studentmediene/kapina-backend)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/00e9c6201d2821d81f79/test_coverage)](https://codeclimate.com/github/Studentmediene/kapina-backend/test_coverage)
